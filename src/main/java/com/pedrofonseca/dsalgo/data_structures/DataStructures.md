@@ -4,6 +4,7 @@ with my notes on them.
 # Table of Contents:
 - [Array](#array)
 - [Vector](#vector)
+- [Queue](#queue)
 
 ## Array
 #### What is it?
@@ -71,3 +72,45 @@ List synchronizedArrayList = Collections.synchronizedList(new ArrayList(...));
 ```
 Both ArrayList and Vector are dynamically sized, but ArrayList increases
 buffer size by 50% increments, while Vector does so by 100%.
+
+## Queue
+#### What is it?
+Data structure where data is stored and retrieved in a FIFO (first in,
+first out) approach. Elements are added progressively (i.e. to the back
+of the queue), and dequeuing retrieves the element at the front of the
+queue.  
+Queues can be implemented through arrays or linked lists.
+
+#### Implementation
+A problem with array based queues is that after it fills up, new
+elements can only be added after all elements are removed from it (since
+new elements are added at the back, but dequeue is from the front). A
+circular queue can circumvent this problem. Circular queues use pointers
+to track the head and the tail of the queue, meaning elements can be
+inserted anytime there's available space. The issue of a queue filling
+up can also be avoided if the circular array is dynamically sized
+(similar to a vector, as it increases/decreases in size as the queue
+fills up/empties out).  
+Linked list based queues do not face this optimization issue.
+
+#### Average Complexities
+| Access | Search | Insert | Delete |
+|--------|--------|--------|--------|
+| O(n)   | O(n)   | O(1)   | O(1)   |
+
+**Notes on Complexity**
+- Access and search are non standard operations in a queue. Both are
+  O(n) if relying on queue operations. If implemented as operations of
+  the underlying structure (either arrays ou lined lists), the
+  complexity would match them as well.
+- Insert is treated as a queue operation (adding an element). Delete is
+  treated as a dequeue. Both are array/linked list manipulation through
+  indexes, so O(1).
+  
+#### Java Implementation
+[Queue](https://docs.oracle.com/javase/7/docs/api/java/util/Queue.html)
+interface implemented through a linked list. By using a linked list, it
+benefits from the optimization of circular queues.
+```java
+Queue queue = new LinkedList();
+```

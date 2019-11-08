@@ -154,13 +154,13 @@ public class Vector<T> implements IVector<T> {
         if (mSize > 0) {
             if (mSize > mArray.length / 2) {
                 T[] newArray = (T[]) new Object[mArray.length * 2];
-                for(int index = 0; index < mArray.length; index++ ) {
+                for(int index = 0; index < mSize; index++ ) {
                     newArray[index] = mArray[index];
                 }
                 mArray = newArray;
             } else if (mSize < mArray.length / 4)  {
                 T[] newArray = (T[]) new Object[mArray.length / 2];
-                for(int index = 0; index < mArray.length; index++ ) {
+                for(int index = 0; index < mSize; index++ ) {
                     newArray[index] = mArray[index];
                 }
                 mArray = newArray;
