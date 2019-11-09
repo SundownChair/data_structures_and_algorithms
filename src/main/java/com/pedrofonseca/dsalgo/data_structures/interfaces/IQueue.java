@@ -7,7 +7,7 @@ public interface IQueue<T> {
      * @param element Element to add
      * @return true if insert was successful; false if not
      */
-    boolean add(T element);
+    boolean add(T pElement);
 
     /**
      * Removes element at the front of the queue

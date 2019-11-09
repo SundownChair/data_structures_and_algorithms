@@ -21,8 +21,8 @@ public class ArrayQueue<T> implements IQueue<T> {
      * {@inheritDoc}
      */
     @Override
-    public boolean add(T element) {
-        if(element == null) {
+    public boolean add(T pElement) {
+        if(pElement == null) {
             return false;
         }
 
@@ -31,7 +31,7 @@ public class ArrayQueue<T> implements IQueue<T> {
         }
 
         mBackIndex++;
-        mQueue[backIndex()] = element;
+        mQueue[backIndex()] = pElement;
 
         return true;
     }
@@ -45,15 +45,15 @@ public class ArrayQueue<T> implements IQueue<T> {
             return null;
         }
 
-        T returnable = mQueue[frontIndex()];
+        T lReturnable = mQueue[frontIndex()];
         mQueue[frontIndex()] = null;
         mFrontIndex++;
 
-        if (size() <= mQueue.length / 4) {
+        if (size() > 0 && size() < mQueue.length / 4) {
             decreaseSize();
         }
 
-        return returnable;
+        return lReturnable;
     }
 
     /**
@@ -65,9 +65,7 @@ public class ArrayQueue<T> implements IQueue<T> {
             return null;
         }
 
-        T returnable = mQueue[frontIndex()];
-
-        return returnable;
+        return mQueue[frontIndex()];
     }
 
     /**
@@ -83,30 +81,31 @@ public class ArrayQueue<T> implements IQueue<T> {
      */
     @SuppressWarnings("unchecked")
     private void increaseSize() {
-        T[] newArray = (T[]) new Object[mQueue.length * 2];
+        T[] lNewArray = (T[]) new Object[mQueue.length * 2];
 
-        resize(newArray);
+        resize(lNewArray);
     }
 
     /**
      * Halves length of the queue array, sequences data and resets pointers
      */
+    @SuppressWarnings("unchecked")
     private void decreaseSize() {
-        T[] newArray = (T[]) new Object[mQueue.length / 2];
+        T[] lNewArray = (T[]) new Object[mQueue.length / 2];
 
-        resize(newArray);
+        resize(lNewArray);
     }
 
     private void resize(T[] pNewArray) {
-        int sublength = 0;
+        int lSublength = 0;
 
         // If array is wrapped, get last chunk
         if (backIndex() < frontIndex()) {
-            sublength = size() - (mQueue.length - frontIndex());
-            System.arraycopy(mQueue, 0, pNewArray, sublength + 1, sublength);
+            lSublength = size() - (mQueue.length - frontIndex());
+            System.arraycopy(mQueue, 0, pNewArray, mQueue.length - lSublength, lSublength);
         }
 
-        System.arraycopy(mQueue, frontIndex(), pNewArray, 0,((mBackIndex - mFrontIndex)) - sublength + 1);
+        System.arraycopy(mQueue, frontIndex(), pNewArray, 0,((mBackIndex - mFrontIndex)) - lSublength + 1);
 
         mQueue = pNewArray;
         mBackIndex = size() - 1;

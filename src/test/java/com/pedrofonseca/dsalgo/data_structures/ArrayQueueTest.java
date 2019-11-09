@@ -13,6 +13,29 @@ public class ArrayQueueTest {
     }
 
     @Test
+    public void testCompleteQueueUse() {
+        for (int i = 1; i <= 100; i++) {
+            mTestedClass.add(i);
+        }
+
+        for (int i = 1; i <= 100; i++)  {
+            assert(mTestedClass.poll() == i);
+        }
+
+        assert(mTestedClass.size() == 0);
+
+        for (int i = 1; i <= 100; i++) {
+            mTestedClass.add(i);
+        }
+
+        for (int i = 1; i <= 100; i++)  {
+            assert(mTestedClass.poll() == i);
+        }
+
+        assert(mTestedClass.size() == 0);
+    }
+
+    @Test
     public void testWrapResizingDown() {
         for(int i = 1; i <= 10; i++) {
             mTestedClass.add(i);

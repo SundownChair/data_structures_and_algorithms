@@ -2,6 +2,8 @@ package com.pedrofonseca.dsalgo.data_structures;
 
 import com.pedrofonseca.dsalgo.data_structures.interfaces.IVector;
 
+import java.util.Arrays;
+
 public class Vector<T> implements IVector<T> {
 
     private static final int STARTING_SIZE = 5;
@@ -33,14 +35,12 @@ public class Vector<T> implements IVector<T> {
     public void insert(int pIndex, T pValue) {
         indexCheck(pIndex);
 
-        T curr = pValue;
-        int index = pIndex;
-        while(curr != null) {
-            T tmp = mArray[index];
-            mArray[index] = curr;
-            curr = tmp;
-
-            index++;
+        T lCurr = pValue;
+        int lIndex = pIndex;
+        while(lCurr != null) {
+            T tmp = mArray[lIndex];
+            mArray[lIndex++] = lCurr;
+            lCurr = tmp;
         }
 
         mSize++;
@@ -55,7 +55,7 @@ public class Vector<T> implements IVector<T> {
     public T remove(int pIndex) {
         indexCheck(pIndex);
 
-        T returnable = mArray[pIndex];
+        T lReturnable = mArray[pIndex];
 
         int lIndex;
         for (lIndex = pIndex; lIndex < mSize - 1; lIndex++) {
@@ -67,7 +67,7 @@ public class Vector<T> implements IVector<T> {
 
         resize();
 
-        return returnable;
+        return lReturnable;
     }
 
     /**
@@ -75,16 +75,16 @@ public class Vector<T> implements IVector<T> {
      */
     @Override
     public T remove(T pValue) {
-        T returnable = null;
+        T lReturnable = null;
 
         for (int index = 0; index < mSize; index++) {
             if (mArray[index].equals(pValue)) {
-                returnable = remove(index);
+                lReturnable = remove(index);
                 break;
             }
         }
 
-        return returnable;
+        return lReturnable;
     }
 
     /**
@@ -153,17 +153,9 @@ public class Vector<T> implements IVector<T> {
     private void resize() {
         if (mSize > 0) {
             if (mSize > mArray.length / 2) {
-                T[] newArray = (T[]) new Object[mArray.length * 2];
-                for(int index = 0; index < mSize; index++ ) {
-                    newArray[index] = mArray[index];
-                }
-                mArray = newArray;
+                mArray = Arrays.copyOf(mArray, mArray.length * 2);
             } else if (mSize < mArray.length / 4)  {
-                T[] newArray = (T[]) new Object[mArray.length / 2];
-                for(int index = 0; index < mSize; index++ ) {
-                    newArray[index] = mArray[index];
-                }
-                mArray = newArray;
+                mArray = Arrays.copyOf(mArray, mArray.length / 2);
             }
         }
     }

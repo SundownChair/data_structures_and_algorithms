@@ -101,7 +101,7 @@ Linked list based queues do not face this optimization issue.
 **Notes on Complexity**
 - Access and search are non standard operations in a queue. Both are
   O(n) if relying on queue operations. If implemented as operations of
-  the underlying structure (either arrays ou lined lists), the
+  the underlying structure (either arrays ou linked lists), the
   complexity would match them as well.
 - Insert is treated as a queue operation (adding an element). Delete is
   treated as a dequeue. Both are array/linked list manipulation through
@@ -114,3 +114,38 @@ benefits from the optimization of circular queues.
 ```java
 Queue queue = new LinkedList();
 ```
+
+## Stack
+#### What is it?
+Data structure where data is stored according to a LIFO (last in, first
+out) approach. Elements are pushed/added progressively (ie. to the top
+of the stack), and unstacking/popping retrieves the element at the top
+of the stack. Stacks can be implemented through arrays or linked lists.
+
+#### Implementation
+Array based stacks can use array progressively, adding the first element
+to index 0 and and moving up the array's index as more elements are
+added. To do so an implementation must track the index of the last
+element inserted, as it is the index to retrieve on a pop. In order to
+avoid the stack running out of space, the implemented array can be
+dynamically size (ie. a vector).  
+A linked list based stack must also track the last inserted node, but
+faces no size limitations.
+
+#### Average Complexities
+| Access | Search | Insert | Delete |
+|--------|--------|--------|--------|
+| O(n)   | O(n)   | O(1)   | O(1)   |
+
+**Notes on Complexity**
+- Access and search are non standard operations in a stack. Both are
+  O(n) if relying on stack operations. If implemented as operations of
+  the underlying structure (either arrays ou linked lists), the
+  complexity would match them as well.
+- Insert is treated as a stack operation (pushing an element). Delete is
+  treated as a pop. Both are array/linked list manipulation through
+  indexes, so O(1).
+  
+#### Java Implementation
+[Stack](https://docs.oracle.com/javase/7/docs/api/java/util/Stack.html)
+class.
