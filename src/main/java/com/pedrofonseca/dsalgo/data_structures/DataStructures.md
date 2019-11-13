@@ -5,6 +5,8 @@ with my notes on them.
 - [Array](#array)
 - [Vector](#vector)
 - [Queue](#queue)
+- [Stack](#stack)
+- [Deque](#deque)
 
 ## Array
 #### What is it?
@@ -149,3 +151,42 @@ faces no size limitations.
 #### Java Implementation
 [Stack](https://docs.oracle.com/javase/7/docs/api/java/util/Stack.html)
 class.
+
+## Deque
+#### What is it?
+Short for Double Ended Queue. Elements can be added and removed from
+both the front and the back of the deque. As such, a deque can be used
+both as a queue (adding to end; removing from front) or as a stack (add
+to end; remove from end). Can be implemented through arrays or linked
+lists.
+
+#### Implementation
+Array based deques benefit from using a circular array in order to
+optimize space complexity, much like an array based [queue](#queue).
+Pointers track the front and back indexes, and a dynamic array can be
+used instead of a static array in order to prevent the deque from
+filling up.  
+Linked List based deques do not face this optimization problem.
+
+#### Average Complexities
+| Access | Search | Insert | Delete |
+|--------|--------|--------|--------|
+| O(n)   | O(n)   | O(1)   | O(1)   |
+
+**Notes on Complexity**
+- Access and search are non standard operations in a deque. Both are
+  O(n) if relying on stack operations. If implemented as operations of
+  the underlying structure (either arrays ou linked lists), the
+  complexity would match them as well.
+- Insert and Delete are array/linked list manipulation through
+  indexes, so O(1).
+  
+#### Java Implementation
+[Deque](https://docs.oracle.com/javase/7/docs/api/java/util/Deque.html)
+interface implemented through
+[Array Deque](https://docs.oracle.com/javase/7/docs/api/java/util/ArrayDeque.html)
+(for an array based deque) or
+[Linked List](https://docs.oracle.com/javase/7/docs/api/java/util/LinkedList.html)
+(for a linked list based deque).
+
+

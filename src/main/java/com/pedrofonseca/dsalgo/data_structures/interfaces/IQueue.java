@@ -4,7 +4,7 @@ public interface IQueue<T> {
     /**
      * Add element to last position of the queue
      *
-     * @param element Element to add
+     * @param pElement Element to add
      * @return true if insert was successful; false if not
      */
     boolean add(T pElement);
