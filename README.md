@@ -3,4 +3,4 @@ Collection of my notes and implementations on common data structures and algorit
 
 ## Master Index
 
-[Algorithms](/src/main/java/com/pedrofonseca/dsalgo/data_structures/DataStructures.md)
+[Data Structures](/src/main/java/com/pedrofonseca/dsalgo/data_structures/DataStructures.md)

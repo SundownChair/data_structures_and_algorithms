@@ -7,6 +7,7 @@ with my notes on them.
 - [Queue](#queue)
 - [Stack](#stack)
 - [Deque](#deque)
+- [Heap](#heap)
 
 ## Array
 #### What is it?
@@ -175,7 +176,7 @@ Linked List based deques do not face this optimization problem.
 
 **Notes on Complexity**
 - Access and search are non standard operations in a deque. Both are
-  O(n) if relying on stack operations. If implemented as operations of
+  O(n) if relying on deque operations. If implemented as operations of
   the underlying structure (either arrays ou linked lists), the
   complexity would match them as well.
 - Insert and Delete are array/linked list manipulation through
@@ -189,4 +190,65 @@ interface implemented through
 [Linked List](https://docs.oracle.com/javase/7/docs/api/java/util/LinkedList.html)
 (for a linked list based deque).
 
+## Heap   
+#### What is it?
+A Priority Queue is a data structure that can be implemented through
+arrays (sorted or unsorted), linked lists, trees, and so forth.
+Regardless of performance, a Priority Queue must always pop the most
+extreme value it currently contains (maximum or minimum, calculated
+through whatever criteria was set for the queue). However, performance
+can vary depending on implementation.  
+Heaps are a specific implementation of Priority Queues. Heaps are
+represented as complete binary trees (all levels are full, except for
+possibly the last one). As complete trees, they can be implemented
+through an array instead of a tree - operational complexity is the same,
+but trees have higher constant factors (a tree node takes more memory
+than an array index).  
+The most extreme value is always the root of the tree, which is valid
+for all subtrees. MaxHeaps have the largest value at the root, and
+MinHeaps the smallest.
 
+#### Implementation
+Heaps are implemented through arrays, being filled progressively. Given
+arr[i] is an element of a heap with the root at index 0, the
+relationship between indexes as tree nodes is expressed below:
+- Parent Node: arr[ (i - 1) / 2 ]  
+- Left Child: arr[ (2 * i) + 1 ]
+- Right Child: arr[ (2 * i) + 2 ]   
+
+The heap condition is enforced by "heapifying" values up or down the
+tree on insert and on delete:
+- Insert: value inserted at first empty index and "heapified up" -
+  compared with the parent element and switched if more extreme (repeat
+  until either not more extreme than parent or at root);
+- Delete: value removed from root and value at last index moved to root,
+  then "heapified down" - compared with both child elements and if less
+  extreme, switched with the most extreme child (repeat until either not
+  less extreme than any child or at leaf).  
+
+#### Average Complexities
+| Access | Search | Insert     | Delete     |
+|--------|--------|------------|------------|
+| O(1)   | O(n)   | O(log n)   | O(log n)   |
+
+**Notes on Complexity**
+- Access is usually performed only at root level to get the most extreme
+  value.  
+- Search is not a standard operation on a heap, since the only necessary
+  element is the most extreme one. Other elements have to be searched by
+  iterating through the array (O(n)).  
+- Insert is always performed at the first empty index, which is O(1).
+  However, it must then be "heapified up" the heap, making it O(log n).  
+- Delete is usually only used at root level by removing the root and
+  placing the last element of the heap at root. It is then heapified
+  down, making it O(log n). Deleting an element other than root is a non
+  standard operation which would be O(n), since the value would have to
+  be searched first.     
+  
+#### Java Implementation
+[PriorityQueue](https://docs.oracle.com/javase/7/docs/api/java/util/PriorityQueue.html)
+class. Defaults to a MinHeap. To implement a MaxHeap, reverse the order
+of the Collection :
+```java
+PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+```
