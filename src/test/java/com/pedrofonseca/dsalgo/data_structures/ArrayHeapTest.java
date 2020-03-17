@@ -9,7 +9,7 @@ public class ArrayHeapTest {
 
     @Before
     public void setup() {
-        mTestedClass = new ArrayHeap<>();
+        mTestedClass = new ArrayHeap<>(ArrayHeap.HeapType.Min);
     }
 
     @Test

@@ -16,10 +16,21 @@ public class ArrayHeap<T extends Comparable<? super T>> implements IHeap<T> {
 
     private final static int MIN_SIZE = 516;
 
+    private HeapType mType;
+
+    public static enum HeapType{
+        Min, Max
+    }
+
     @SuppressWarnings("unchecked")
-    public ArrayHeap() {
+    public ArrayHeap(HeapType pType) {
         mHeap = (T[]) new Comparable[MIN_SIZE];
         mSize = 0;
+        mType = pType;
+    }
+
+    public ArrayHeap() {
+        this(HeapType.Min);
     }
 
     /**
@@ -111,7 +122,7 @@ public class ArrayHeap<T extends Comparable<? super T>> implements IHeap<T> {
 
         int lParent = getParentIndex(pIndex);
         T lParentNode = mHeap[lParent];
-        if(lParentNode != null && lNode.compareTo(lParentNode) < 0) {
+        if(lParentNode != null && moreExtreme(lNode, lParentNode)) {
             swapNodes(lParent, pIndex);
             heapifyUp(lParent);
         }
@@ -131,10 +142,9 @@ public class ArrayHeap<T extends Comparable<? super T>> implements IHeap<T> {
         int lNewIndex = -1;
         T lNewNode = null;
         // Both are lesser than node
-        if (lLeftNode != null && lNode.compareTo(lLeftNode) > 0 &&
-            lRightNode != null && lNode.compareTo(lRightNode) > 0) {
-            // Swap with smallest one, if equal, use right
-            if (lLeftNode.compareTo(lRightNode) < 0) {
+        if (lLeftNode != null && !moreExtreme(lNode, lLeftNode) &&
+            lRightNode != null && !moreExtreme(lNode, lRightNode)) {
+            if (moreExtreme(lLeftNode, lRightNode)) {
                 lNewIndex = lLeft;
                 lNewNode = lLeftNode;
             } else {
@@ -142,13 +152,11 @@ public class ArrayHeap<T extends Comparable<? super T>> implements IHeap<T> {
                 lNewNode = lRightNode;
             }
         }
-        // Right is lesser than node
-        else if (lRightNode != null && lNode.compareTo(lRightNode) > 0) {
+        else if (lRightNode != null && !moreExtreme(lNode, lRightNode)) {
             lNewIndex = lRight;
             lNewNode = lRightNode;
         }
-        // Left is lesser than node
-        else if (lLeftNode != null && lNode.compareTo(lLeftNode) > 0){
+        else if (lLeftNode != null && !moreExtreme(lNode, lLeftNode)){
             lNewIndex = lLeft;
             lNewNode = lLeftNode;
         }
@@ -160,6 +168,27 @@ public class ArrayHeap<T extends Comparable<? super T>> implements IHeap<T> {
         swapNodes(lNewIndex, pIndex);
 
         heapifyDown(lNewIndex);
+    }
+
+    /**
+     * Returns true if first node is more extreme than second node, false otherwise.
+     * @param pNode1
+     * @param pNode2
+     * @return
+     */
+    private boolean moreExtreme(T pNode1, T pNode2) {
+        int compare = pNode1.compareTo(pNode2);
+        if (mType.equals(HeapType.Min)) {
+            if(compare < 0)
+                return true;
+            else
+                return false;
+        } else {
+            if(compare > 0)
+                return true;
+            else
+                return false;
+        }
     }
 
     private void increaseSize() {
