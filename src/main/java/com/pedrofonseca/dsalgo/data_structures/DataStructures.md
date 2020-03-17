@@ -8,6 +8,9 @@ with my notes on them.
 - [Stack](#stack)
 - [Deque](#deque)
 - [Heap](#heap)
+- [LinkedList](#linked-list)
+- [Trees](#trees)
+- [Binary Search Tree](#binary-search-tree)
 
 ## Array
 #### What is it?
@@ -252,3 +255,173 @@ of the Collection :
 ```java
 PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
 ```
+
+## Linked List
+#### What is it?
+Linked Lists are a linear, non contiguous data structure where elements
+(called nodes) are "linked" through pointers. Every node stores its own
+value and a pointer to the next node in the list. The header of a linked
+list is a pointer to its first node, and some implementations can also
+have a tail pointer at the last node.  
+Unlike arrays, linked lists have no fixed size (nodes can be
+continuously added), and insertion/deletion does not transpose other
+elements - only node pointers must be updated (ie: inserting node B
+after node A means that A's next pointer must be updated to B), and
+eventually the head or tail pointer as well. However, access to nodes is
+sequential (unlike an array's random access), and a node will take up
+more space than an array's index (note that an array will take up space
+for its entire capacity, assigned or not; linked lists only contain
+assigned elements).  
+A Doubly Linked List has each node have a pointer to its next and
+previous node. This means that they can be traversed forwards and,
+unlike Singly Linked Lists, backwards. Space consumption is higher due
+to the extra pointer, but access to a node's previous node is
+simplified.  
+Rule of thumb: arrays are preferred when accesses are more frequent, and
+linked lists when insertions/deletions are more frequent (especially mid
+list operations).
+
+#### Average Complexities
+| Access | Search | Insert | Delete |
+|--------|--------|--------|--------|
+| O(n)   | O(n)   | O(1)   | O(1)   |
+
+**Notes on Complexity**
+- Search and access is O(n) because traversal is sequential, so the list
+  must be traversed linearly.
+- Insert and delete assume that the position to insert has already been
+  found (otherwise list traversal is O(n)). 
+
+#### Java Implementation
+[LinkedList](https://docs.oracle.com/javase/7/docs/api/java/util/LinkedList.html)
+implementation of the
+[List](https://docs.oracle.com/javase/8/docs/api/java/util/List.html)
+interface (implements a Doubly Linked List).  
+[LinkedHashMap](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashMap.html)
+and
+[LinkedHashSet](https://docs.oracle.com/javase/7/docs/api/java/util/LinkedHashSet.html)
+also implement LinkedList (as well as
+[HashMap](https://javadoc.scijava.org/Java/java/util/HashMap.html) and
+[HashSet](https://docs.oracle.com/javase/7/docs/api/java/util/HashSet.html),
+respectively). However, consider the different complexities and
+behaviours of hash maps and hash sets.
+
+## Trees
+#### What are they?
+Trees are datastructures that represent and organize data in linked
+nodes, similarly to linked lists. Unlike linked lists, tree nodes can
+have more than one node linked to them, in a parent-child relationship.
+All trees have a root, a parent node from where the tree effectively
+"starts". Trees where nodes can have at most 2 children nodes (left and
+right) are called binary trees, for instance.  
+Complete trees are trees where elements are filled in from left to right
+in all populated levels. Heaps are by definition complete trees.  
+Full trees are tree that are complete and where all populated levels are
+completely filled.  
+
+#### Variations
+Besides common data structures (Binary Search Trees, AVL Trees,
+Red-Black Trees, etc), other specialized structures can be created using
+trees. One example would be Expression Trees, which can both read, write
+and solve postfix expressions.
+
+## Binary Search Tree
+#### What is it?
+A type of binary tree (where each node has at most 2 children and
+exactly one parent) where the following condition is applied to the tree
+and any existing sub trees: left node < root node < right node.  
+Due to the condition above, a balanced binary search tree can be
+searched like a sorted array is via binary search (eliminating half the
+search space with every operation), bue due to the nature of nodes, it
+will present better performance for inserting/deleting records.
+
+#### Average Complexities
+| Access     | Search     | Insert     | Delete     |
+|------------|------------|------------|------------|
+| O(log n)   | O(log n)   | O(log n)   | O(log n)   |
+**Notes on Complexity**
+- The above assumes that the tree is relatively balanced, making its
+  height close to log(n). However, order of insertion will affect the
+  performance of all of the above operations. A linear tree will have a
+  height of n, which will make all operations have an average complexity
+  of O(n).
+  
+#### Tree Traversal
+###### Pre-Order Traversal (depth first):
+- Visit root node
+- Visit left node
+- Visit right node
+
+###### In-Order Traversal (depth first):
+This will produce an sorted traversal of the elements of the array. 
+- Visit left node
+- Visit root node
+- visit right node
+
+###### Post-Order Traversal (depth first):
+- Visit left child
+- Visit right child
+- Visit root
+
+###### Level Order Traversal (breadth first):
+This will traverse the tree level by level, only starting the next level
+after the previous has been completely traversed. Starting from the
+root, place it in a queue and iterate the following:
+- Pop element from queue
+- Check element
+- Push child nodes into queue
+- Repeat until queue is empty
+
+#### Rotations
+A Binary Search Tree's nodes can, in certain contexts, be "rotated"
+while keeping the BST condition. This is particularly important if one
+is trying to keep a tree balanced without having to rebuild it after
+every change.  
+There are four possible rotation scenarios that can affect the balance
+of a BST:  
+###### Left Rotation (RR case)
+``` 
+A┐    
+ B┐ =>  ┌B┐
+  C     A C
+```
+A left rotation makes a node's right child its parent (effectively
+"rotating" the node to the left of the child).
+
+######  Right Rotation (LL case)
+```
+ ┌A
+┌B  =>  ┌B┐
+C       C A
+```
+A right rotation makes a node's left child its parent (effectively
+"rotating" the node to the right of the child).  
+
+###### Right Left Rotation (RL case)
+```
+A┐      A┐       
+┌B  =>   C┐  =>  ┌C┐
+C         B      A B
+```
+A right rotation of the node's child followed by a left rotation of the
+node.
+
+###### Left Right Rotation (LR case)
+```
+┌A       ┌A      
+B┐  =>  ┌C   =>  ┌C┐
+ C      B        B A
+```
+A left rotation of the node's child followed by a righht rotation of the
+node.
+
+#### Java Implementation
+[TreeMap](https://docs.oracle.com/javase/8/docs/api/java/util/TreeMap.html)
+and
+[TreeSet](https://docs.oracle.com/javase/7/docs/api/java/util/TreeSet.html).
+Both function like a Red-Black Tree, ordered and self balancing - as
+such, can be used as simple BSTs. TreeMap accepts <key, value> pairs
+(implements
+[Map](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html)) and
+TreeSet accepts only values (implements 
+[Set](https://docs.oracle.com/javase/7/docs/api/java/util/Set.html)).
