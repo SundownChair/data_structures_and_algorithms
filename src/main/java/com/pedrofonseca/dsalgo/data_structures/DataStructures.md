@@ -11,6 +11,7 @@ with my notes on them.
 - [LinkedList](#linked-list)
 - [Trees](#trees)
 - [Binary Search Tree](#binary-search-tree)
+- [AVL Tree](#avl-tree)
 
 ## Array
 #### What is it?
@@ -339,6 +340,7 @@ will present better performance for inserting/deleting records.
 | Access     | Search     | Insert     | Delete     |
 |------------|------------|------------|------------|
 | O(log n)   | O(log n)   | O(log n)   | O(log n)   |
+
 **Notes on Complexity**
 - The above assumes that the tree is relatively balanced, making its
   height close to log(n). However, order of insertion will affect the
@@ -425,3 +427,83 @@ such, can be used as simple BSTs. TreeMap accepts <key, value> pairs
 [Map](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html)) and
 TreeSet accepts only values (implements 
 [Set](https://docs.oracle.com/javase/7/docs/api/java/util/Set.html)).
+
+## AVL Tree
+#### What is it?
+Self balancing binary tree based on tree height (see below). For the
+root or any subtree, the difference between the left and right nodes'
+height may not be larger than one - if so, the tree is said to be
+unbalanced. After every operation that changes the structure of the tree
+(insertion/deletion/etc), if the tree is left unbalanced, the nodes
+where the height criteria is not met are rotated until they are
+compliant.  
+Compared to a Red-Black Tree, insertions/deletions are more complex
+because the tree must always be balanced, which in turn makes searches
+more efficient. Rule of thumb: AVL Trees are to be used when search
+performance is more important than insertion/deletion performance.
+
+#### Node Height and Balance Factor
+The height of a node is the longest path from any connected leaf node to
+it. It is represented as the largest height between its left and right
+subtree +1 (leaf nodes are considered as having a height of -1).  
+> height(n) = max(n.left, n.right) + 1  
+
+The Balance Factor of a node is the difference of a node's left and
+right subtree's heights. For an AVL Tree, if the balance of a node is
+larger than 1, the node is "left heavy"; if the balance is smaller than
+\-1, the node is "right heavy" - in both cases, rebalancing must occur.
+> balanceFactor(n) = n.left - n.right 
+
+#### Average Complexities
+| Access     | Search     | Insert     | Delete     |
+|------------|------------|------------|------------|
+| O(log n)   | O(log n)   | O(log n)   | O(log n)   |
+
+**Notes on Complexity**
+- Unlike a normal BST, complexity is constant for an AVL Tree due to
+  constant rebalancing.
+
+#### Rebalancing
+Depending on the Balance Factor of a node, different rotations have to
+be applied to rebalance the tree. Four cases can occur:
+- **Node Balance < -1 and Right Child Balance < 0:** Left Rotation of
+  Node
+- **Node Balance < -1 and Right Child Balance > 0:** Right Rotation of
+  Right Child and Left Rotation of Node
+- **Node Balance > 1 and Left Child Balance > 0:** Right Rotation of
+  Node
+- **Node Balance > 1 and Left Child < 0:** Left Rotation of Left Child
+  and Right Rotation of Node
+
+So, for Node n:
+```java
+if (n.balance < -1) {
+    c = n.right;
+    if (c.balance < 0) {
+        leftRotation(n);
+    } else if (c.balance > 0) {
+        rightRotation(c);
+        leftRotation(n);
+    }
+} else if (n.balance > 1) {
+    c = c.left;
+    if (c.balance > 0) {
+        rightRotation(n);
+    } else if (c.balance < 0) {
+        leftRotation(c);
+        rightRotation(n);
+    }
+}
+``` 
+
+#### Java Implementation
+[TreeMap](https://docs.oracle.com/javase/8/docs/api/java/util/TreeMap.html)
+and
+[TreeSet](https://docs.oracle.com/javase/7/docs/api/java/util/TreeSet.html).
+Both function like a Red-Black Tree, ordered and self balancing - as
+such, can be used as simple BSTs. TreeMap accepts <key, value> pairs
+(implements
+[Map](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html)) and
+TreeSet accepts only values (implements 
+[Set](https://docs.oracle.com/javase/7/docs/api/java/util/Set.html)).
+
