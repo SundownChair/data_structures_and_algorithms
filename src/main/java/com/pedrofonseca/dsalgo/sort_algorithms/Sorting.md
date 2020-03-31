@@ -49,10 +49,36 @@ elements (except the first one):
 #### Average Complexity
 | Average | Worst   | Best    | Space Complexity     |
 |---------|---------|---------|----------------------|
-| O(n²)   | O(n²)   | O(n)   | O(1)                 |
+| O(n²)   | O(n²)   | O(n)    | O(1)                 |
 
 **Notes on Complexity**
 - In Place sort
 - Best case is O(n) since each index is only compared to the previous.
   As such, this sort is best used on already sorted/mostly sorted data
   (ie: after inserting a new record in a previously ordered set)
+
+## Shell Sort
+Variation of Insert Sort that swaps values with a decreasing gap. Since
+it prioritizes exchanging extremities, it can move very out of place
+values into position faster than Insert Sort.
+
+#### Algorithm
+Given an unordered array n, i being the current index and m the starting
+gap:
+- For value pair [i, i+m], swap indexes if i+m is more extreme than i
+- Increase i and iterate through n while i+m is a valid index of n
+- When n is traversed, decrease m and start from first step. Iterate
+  while m > 1
+  
+**Notes on Algorithm**
+- As a baseline, m can start as n.length/2 and decrease to half it's
+  size for every iteration
+
+#### Average Complexity
+| Average      | Worst        | Best        | Space Complexity |
+|--------------|--------------|-------------|------------------|
+| O(n log(n)²) | O(n log(n)²) | O(n log(n)) | O(1)             |
+
+**Notes on Complexity**
+- In Place sort
+- Best case is O(n log(n)) assumes an already sorted array
