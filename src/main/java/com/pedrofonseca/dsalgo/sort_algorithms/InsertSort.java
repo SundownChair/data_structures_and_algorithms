@@ -19,13 +19,14 @@ public class InsertSort<T extends Comparable<? super T>> {
 
         for (int index = 1; index < pArray.length; index++) {
             for (int innerIndex = index; innerIndex > 0; innerIndex--) {
-                T tmp = pArray[innerIndex];
-                if (currentSortType == SortType.ASC && pArray[innerIndex].compareTo(pArray[innerIndex - 1]) < 0) {
-                    pArray[innerIndex] = pArray[innerIndex - 1];
-                    pArray[innerIndex - 1] = tmp;
-                } else if (currentSortType == SortType.DSC && pArray[innerIndex].compareTo(pArray[innerIndex - 1]) > 0) {
-                    pArray[innerIndex] = pArray[innerIndex - 1];
-                    pArray[innerIndex - 1] = tmp;
+                T cur = pArray[innerIndex];
+                T curPrev = pArray[innerIndex - 1];
+                if (currentSortType == SortType.ASC && cur.compareTo(curPrev) < 0) {
+                    pArray[innerIndex] = curPrev;
+                    pArray[innerIndex - 1] = cur;
+                } else if (currentSortType == SortType.DSC && cur.compareTo(curPrev) > 0) {
+                    pArray[innerIndex] = curPrev;
+                    pArray[innerIndex - 1] = cur;
                 } else {
                     break;
                 }
