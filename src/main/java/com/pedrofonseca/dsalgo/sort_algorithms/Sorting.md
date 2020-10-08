@@ -82,3 +82,33 @@ gap:
 **Notes on Complexity**
 - In Place sort
 - Best case is O(n log(n)) assumes an already sorted array
+
+## Bubble Sort
+Simple sort that iterates through all elements in an array, switching
+any contiguous elements that are unordered. Will perform complete passes
+through the array until no switches are made. The first pass will
+assuredly place the most extreme element in the last position; the
+second pass, the second most extreme in the second to last position, and
+so forth until the array is ordered.
+
+#### Algorithm
+Given an unordered array a, and i is the current index, iterate through
+all elements except the last:
+- Compare element at i to i+1
+- If next element is more extreme, swap elements
+- Repeat for all elements, and repeat passes until no swaps are made for
+  a full pass
+  
+#### Complexity
+| Average      | Worst        | Best        | Space Complexity |
+|--------------|--------------|-------------|------------------|
+| O(n²)        | O(n²)        | O(n)        | O(n)             |
+
+**Notes on Complexity**
+- In Place sort
+- Best case is an already sorted or almost sorted array
+- Don't use this algorithm, it has terrible performance
+
+## Merge Sort
+Divide given list in half  
+Stable, but out of place (requires copy of the data)
