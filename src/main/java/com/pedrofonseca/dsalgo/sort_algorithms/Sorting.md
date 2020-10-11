@@ -112,5 +112,24 @@ all elements except the last:
 - Don't use this algorithm, it has terrible performance
 
 ## Merge Sort
-Divide given list in half  
-Stable, but out of place (requires copy of the data)
+Divide and conquer algorithm that recursively splits the array in half,
+until it is in groups of one and then put back together in order, until
+the array is put back together in sorted order.
+
+#### Algorithm
+Given an unordered array a:
+- Recursively split a into arrays of half the size, until the resulting
+  arrays are one element in length
+- Rejoin the elements in order (any sorting logic can be applied for
+  this), until all elements are put back together in a sorted order
+  
+#### Complexity
+| Average      | Worst        | Best        | Space Complexity |
+|--------------|--------------|-------------|------------------|
+| O(n log(n))  | O(n log(n))  | O(n log(n)) | O(n)             |
+
+**Notes on Complexity**
+- Stable, but out of place (requires copy of the data - can be done
+  inline, but becomes more complex)
+- Performance is fixed. No difference in execution complexity when
+  applied to a non ordered vs an ordered array.
