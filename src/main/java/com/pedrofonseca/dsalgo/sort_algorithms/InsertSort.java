@@ -1,18 +1,20 @@
 package com.pedrofonseca.dsalgo.sort_algorithms;
 
-public class InsertSort<T extends Comparable<? super T>> {
+public class InsertSort {
 
-    public static enum SortType { ASC, DSC }
+    private static SortEnum.SortType currentSortType;
 
-    private SortType currentSortType = SortType.ASC;
-
-    public InsertSort() { }
-
-    public InsertSort(SortType pSortType) {
-        currentSortType = pSortType;
+    public static <T extends Comparable<? super T>> T[] sortAsc(T[] pArray) {
+        currentSortType = SortEnum.SortType.ASC;
+        return sort(pArray);
     }
 
-    public T[] sort(T[] pArray) {
+    public static <T extends Comparable<? super T>> T[] sortDesc(T[] pArray) {
+        currentSortType = SortEnum.SortType.DSC;
+        return sort(pArray);
+    }
+
+    private static <T extends Comparable<? super T>> T[] sort(T[] pArray) {
         if (pArray == null || pArray.length == 0) {
             return null;
         }
@@ -21,10 +23,10 @@ public class InsertSort<T extends Comparable<? super T>> {
             for (int innerIndex = index; innerIndex > 0; innerIndex--) {
                 T cur = pArray[innerIndex];
                 T curPrev = pArray[innerIndex - 1];
-                if (currentSortType == SortType.ASC && cur.compareTo(curPrev) < 0) {
+                if (currentSortType == SortEnum.SortType.ASC && cur.compareTo(curPrev) < 0) {
                     pArray[innerIndex] = curPrev;
                     pArray[innerIndex - 1] = cur;
-                } else if (currentSortType == SortType.DSC && cur.compareTo(curPrev) > 0) {
+                } else if (currentSortType == SortEnum.SortType.DSC && cur.compareTo(curPrev) > 0) {
                     pArray[innerIndex] = curPrev;
                     pArray[innerIndex - 1] = cur;
                 } else {

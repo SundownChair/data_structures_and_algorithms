@@ -1,8 +1,20 @@
 package com.pedrofonseca.dsalgo.sort_algorithms;
 
-public class BubbleSort<T extends Comparable<? super T>> {
+public class BubbleSort {
 
-    public T[] sort(T[] pArray) {
+    private static SortEnum.SortType currentSortType;
+
+    public static <T extends Comparable<? super T>> T[] sortAsc(T[] pArray) {
+        currentSortType = SortEnum.SortType.ASC;
+        return sort(pArray);
+    }
+
+    public static <T extends Comparable<? super T>> T[] sortDesc(T[] pArray) {
+        currentSortType = SortEnum.SortType.DSC;
+        return sort(pArray);
+    }
+
+    private static <T extends Comparable<? super T>> T[] sort(T[] pArray) {
         if (pArray == null || pArray.length == 0) {
             return null;
         }
@@ -11,7 +23,14 @@ public class BubbleSort<T extends Comparable<? super T>> {
         while (noSwap == false) {
             noSwap = true;
             for(int i = 0; i < pArray.length - 1; i++) {
-                if(pArray[i].compareTo(pArray[i+1]) > 0) {
+                if(currentSortType == SortEnum.SortType.ASC
+                        && pArray[i].compareTo(pArray[i+1]) > 0) {
+                    noSwap = false;
+                    T tmp = pArray[i];
+                    pArray[i] = pArray[i+1];
+                    pArray[i+1] = tmp;
+                } else if(currentSortType == SortEnum.SortType.DSC
+                        && pArray[i].compareTo(pArray[i+1]) < 0) {
                     noSwap = false;
                     T tmp = pArray[i];
                     pArray[i] = pArray[i+1];

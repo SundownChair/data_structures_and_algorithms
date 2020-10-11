@@ -32,6 +32,8 @@ elements (last element may be omitted):
 
 **Notes on Complexity**
 - In Place sort
+- Outperforms bubble sort, and usually underperforms insert sort (always
+  O(n²) performance)
 
 ## Insert Sort
 #### Algorithm

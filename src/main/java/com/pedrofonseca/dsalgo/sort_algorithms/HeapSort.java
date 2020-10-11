@@ -1,25 +1,29 @@
 package com.pedrofonseca.dsalgo.sort_algorithms;
 
 import com.pedrofonseca.dsalgo.data_structures.ArrayHeap;
-import com.pedrofonseca.dsalgo.data_structures.interfaces.IHeap;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class HeapSort<T extends Comparable<? super T>> extends ArrayHeap<T> implements IHeap<T> {
-    public HeapSort(HeapType pType) {
-        super(pType);
+public class HeapSort {
+
+    public static <T extends Comparable<? super T>> List<T> sortAsc(T[] pArray) {
+        return sort(pArray, ArrayHeap.HeapType.Min);
     }
 
-    public HeapSort() {
-        super();
+    public static <T extends Comparable<? super T>> List<T> sortDesc(T[] pArray) {
+        return sort(pArray, ArrayHeap.HeapType.Max);
     }
 
-    public List<T> sort() {
+    private static <T extends Comparable<? super T>> List<T> sort(T[] pArray, ArrayHeap.HeapType pHeapType) {
+        ArrayHeap<T> lHeap = new ArrayHeap<>(pHeapType);
+        Arrays.stream(pArray).forEach(lHeap::add);
+
         List<T> sortedArray = new ArrayList<>();
 
-        while (size() > 0) {
-            sortedArray.add(removeHead());
+        while (lHeap.size() > 0) {
+            sortedArray.add(lHeap.removeHead());
         }
 
         return sortedArray;

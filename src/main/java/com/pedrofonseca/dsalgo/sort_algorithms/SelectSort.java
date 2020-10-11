@@ -1,18 +1,20 @@
 package com.pedrofonseca.dsalgo.sort_algorithms;
 
-public class SelectSort<T extends Comparable<? super T>> {
+public class SelectSort {
 
-    public static enum SortType { ASC, DSC }
+    private static SortEnum.SortType currentSortType;
 
-    private SortType currentSortType = SortType.ASC;
-
-    public SelectSort() { }
-
-    public SelectSort(SortType pSortType) {
-        currentSortType = pSortType;
+    public static <T extends Comparable<? super T>> T[] sortDesc(T[] pArray) {
+        currentSortType = SortEnum.SortType.DSC;
+        return sort(pArray);
     }
 
-    public T[] sort(T[] pArray) {
+    public static <T extends Comparable<? super T>> T[] sortAsc(T[] pArray) {
+        currentSortType = SortEnum.SortType.ASC;
+        return sort(pArray);
+    }
+
+    private static <T extends Comparable<? super T>> T[] sort(T[] pArray) {
         if (pArray == null || pArray.length == 1) {
             return pArray;
         }
@@ -27,16 +29,16 @@ public class SelectSort<T extends Comparable<? super T>> {
         return pArray;
     }
 
-    private int findExtremeIndexFromSubarray(T[] pArray, int pStartIndex) {
+    private static <T extends Comparable<? super T>> int findExtremeIndexFromSubarray(T[] pArray, int pStartIndex) {
         T extreme = pArray[pStartIndex];
         int extremeIndex = pStartIndex;
 
         for (int index = pStartIndex + 1; index < pArray.length; index++) {
             T cur = pArray[index];
-            if (currentSortType == SortType.ASC && cur.compareTo(extreme) < 0) {
+            if (currentSortType == SortEnum.SortType.ASC && cur.compareTo(extreme) < 0) {
                 extreme = cur;
                 extremeIndex = index;
-            } else if (currentSortType == SortType.DSC && cur.compareTo(extreme) > 0) {
+            } else if (currentSortType == SortEnum.SortType.DSC && cur.compareTo(extreme) > 0) {
                 extreme = cur;
                 extremeIndex = index;
             }
