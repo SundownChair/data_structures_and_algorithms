@@ -23,14 +23,7 @@ public class BubbleSort {
         while (noSwap == false) {
             noSwap = true;
             for(int i = 0; i < pArray.length - 1; i++) {
-                if(currentSortType == SortEnum.SortType.ASC
-                        && pArray[i].compareTo(pArray[i+1]) > 0) {
-                    noSwap = false;
-                    T tmp = pArray[i];
-                    pArray[i] = pArray[i+1];
-                    pArray[i+1] = tmp;
-                } else if(currentSortType == SortEnum.SortType.DSC
-                        && pArray[i].compareTo(pArray[i+1]) < 0) {
+                if(pArray[i].compareTo(pArray[i+1]) * (currentSortType == SortEnum.SortType.ASC ? 1 : -1) > 0) {
                     noSwap = false;
                     T tmp = pArray[i];
                     pArray[i] = pArray[i+1];

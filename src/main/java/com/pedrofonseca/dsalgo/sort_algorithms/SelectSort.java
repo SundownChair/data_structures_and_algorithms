@@ -35,10 +35,7 @@ public class SelectSort {
 
         for (int index = pStartIndex + 1; index < pArray.length; index++) {
             T cur = pArray[index];
-            if (currentSortType == SortEnum.SortType.ASC && cur.compareTo(extreme) < 0) {
-                extreme = cur;
-                extremeIndex = index;
-            } else if (currentSortType == SortEnum.SortType.DSC && cur.compareTo(extreme) > 0) {
+            if (cur.compareTo(extreme) * (currentSortType == SortEnum.SortType.ASC ? 1 : -1) < 0) {
                 extreme = cur;
                 extremeIndex = index;
             }

@@ -23,10 +23,7 @@ public class InsertSort {
             for (int innerIndex = index; innerIndex > 0; innerIndex--) {
                 T cur = pArray[innerIndex];
                 T curPrev = pArray[innerIndex - 1];
-                if (currentSortType == SortEnum.SortType.ASC && cur.compareTo(curPrev) < 0) {
-                    pArray[innerIndex] = curPrev;
-                    pArray[innerIndex - 1] = cur;
-                } else if (currentSortType == SortEnum.SortType.DSC && cur.compareTo(curPrev) > 0) {
+                if (cur.compareTo(curPrev) * (currentSortType == SortEnum.SortType.ASC ? 1 : -1) < 0) {
                     pArray[innerIndex] = curPrev;
                     pArray[innerIndex - 1] = cur;
                 } else {
