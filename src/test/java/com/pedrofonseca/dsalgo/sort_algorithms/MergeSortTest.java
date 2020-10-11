@@ -9,27 +9,27 @@ public class MergeSortTest {
     @Test
     public void testAscendingSort() {
 
-        MergeSort.sortAsc(null);
+        tmpMergeSort.sortAsc(null);
 
         Integer[] singleArray = {0};
         Integer[] singleArrayS = {0};
-        assert(Arrays.equals(MergeSort.sortAsc(singleArray), singleArrayS));
+        assert(Arrays.equals(tmpMergeSort.sortAsc(singleArray), singleArrayS));
 
         Integer[] doubleArray = {1, 0};
         Integer[] doubleArrayS = {0, 1};
-        assert(Arrays.equals(MergeSort.sortAsc(doubleArray), doubleArrayS));
+        assert(Arrays.equals(tmpMergeSort.sortAsc(doubleArray), doubleArrayS));
 
         Integer[] array = {10, 1, 7, -3, 5};
         Integer[] arrayS = {-3, 1, 5, 7, 10};
-        assert(Arrays.equals(MergeSort.sortAsc(array), arrayS));
+        assert(Arrays.equals(tmpMergeSort.sortAsc(array), arrayS));
 
         Integer[] sortedArray = {1, 2, 3, 5, 100};
         Integer[] sortedArrayS = {1, 2, 3, 5, 100};
-        assert(Arrays.equals(MergeSort.sortAsc(sortedArray), sortedArrayS));
+        assert(Arrays.equals(tmpMergeSort.sortAsc(sortedArray), sortedArrayS));
 
         Integer[] duplicateArray = {10, 1, 7, -3, 7};
         Integer[] duplicateArrayS = {-3, 1, 7, 7, 10};
-        assert(Arrays.equals(MergeSort.sortAsc(duplicateArray), duplicateArrayS));
+        assert(Arrays.equals(tmpMergeSort.sortAsc(duplicateArray), duplicateArrayS));
     }
 
     @Test
