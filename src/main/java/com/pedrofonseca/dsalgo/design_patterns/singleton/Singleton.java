@@ -1,4 +1,4 @@
-package com.pedrofonseca.dsalgo.design_patterns;
+package com.pedrofonseca.dsalgo.design_patterns.singleton;
 
 public class Singleton {
 
@@ -10,7 +10,7 @@ public class Singleton {
         counter = 0;
     }
 
-    static Singleton getInstance() {
+    public static Singleton getInstance() {
         if(instance == null) {
             instance = new Singleton();
         }

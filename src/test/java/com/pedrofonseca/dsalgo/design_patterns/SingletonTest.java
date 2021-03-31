@@ -1,5 +1,6 @@
 package com.pedrofonseca.dsalgo.design_patterns;
 
+import com.pedrofonseca.dsalgo.design_patterns.singleton.Singleton;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

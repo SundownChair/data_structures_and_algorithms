@@ -19,12 +19,13 @@ it only if one doesn't exist yet.
 #### What is it?
 > The Factory Method pattern defines an interface for creating an object
 > but lets subclasses decide which class to instantiate. The Factory
-> Method pattern lets the class defer instantiation to subclasses.
+> Method lets a class defer instantiation it uses to subclasses.
 
 Used whenever a class cannot predict what subtype of object it will need
 or when complex business logic exist when creating new objects
 (centralizing it in a factory instead of having it spread out throughout
 the code).  
+
 A Factory will usually consist of an interface/abstract class and
 implementations that handle the specific object creation. The Simple
 Factory anti-pattern omits the interface and directly creates concrete
