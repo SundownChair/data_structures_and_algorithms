@@ -2,15 +2,15 @@ package com.pedrofonseca.dsalgo.sort_algorithms;
 
 public class SelectSort {
 
-    private static SortEnum.SortType currentSortType;
+    private static int sortModifier;
 
     public static <T extends Comparable<? super T>> T[] sortDesc(T[] pArray) {
-        currentSortType = SortEnum.SortType.DSC;
+        sortModifier = -1;
         return sort(pArray);
     }
 
     public static <T extends Comparable<? super T>> T[] sortAsc(T[] pArray) {
-        currentSortType = SortEnum.SortType.ASC;
+        sortModifier = 1;
         return sort(pArray);
     }
 
@@ -35,7 +35,7 @@ public class SelectSort {
 
         for (int index = pStartIndex + 1; index < pArray.length; index++) {
             T cur = pArray[index];
-            if (cur.compareTo(extreme) * (currentSortType == SortEnum.SortType.ASC ? 1 : -1) < 0) {
+            if (cur.compareTo(extreme) * sortModifier < 0) {
                 extreme = cur;
                 extremeIndex = index;
             }

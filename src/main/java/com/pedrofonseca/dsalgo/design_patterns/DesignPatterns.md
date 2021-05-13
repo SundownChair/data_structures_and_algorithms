@@ -30,3 +30,16 @@ A Factory will usually consist of an interface/abstract class and
 implementations that handle the specific object creation. The Simple
 Factory anti-pattern omits the interface and directly creates concrete
 factories (seldom used).
+
+## Abstract Factory Method
+#### What is it?
+> The Abstract Factory Method Pattern provides an interface for creating
+> families of related or dependent objects without specifying their
+> concrete classes.
+
+An Abstract Factory groups related concretions of objects in a way that
+makes sense (i.e. some objects might not make sense together, so
+different concrete factories are created to group them in logical ways).  
+
+While a Factory Pattern constructs a single object, an Abstract Factory
+Pattern constructs

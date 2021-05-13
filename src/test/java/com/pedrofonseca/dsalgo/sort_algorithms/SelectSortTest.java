@@ -2,7 +2,7 @@ package com.pedrofonseca.dsalgo.sort_algorithms;
 
 import org.junit.*;
 
-import java.util.Arrays;
+import static org.junit.Assert.assertArrayEquals;
 
 public class SelectSortTest {
 
@@ -12,19 +12,19 @@ public class SelectSortTest {
 
         Integer[] singleArray = {0};
         Integer[] singleArrayS = {0};
-        assert(Arrays.equals(SelectSort.sortAsc(singleArray), singleArrayS));
+        assertArrayEquals(singleArrayS, SelectSort.sortAsc(singleArray));
 
         Integer[] array = {10, 1, 7, -3, 5};
         Integer[] arrayS = {-3, 1, 5, 7, 10};
-        assert(Arrays.equals(SelectSort.sortAsc(array), arrayS));
+        assertArrayEquals(arrayS, SelectSort.sortAsc(array));
 
         Integer[] sortedArray = {1, 2, 3, 5, 100};
         Integer[] sortedArrayS = {1, 2, 3, 5, 100};
-        assert(Arrays.equals(SelectSort.sortAsc(sortedArray), sortedArrayS));
+        assertArrayEquals(sortedArrayS, SelectSort.sortAsc(sortedArray));
 
         Integer[] duplicateArray = {10, 1, 7, -3, 7};
         Integer[] duplicateArrayS = {-3, 1, 7, 7, 10};
-        assert(Arrays.equals(SelectSort.sortAsc(duplicateArray), duplicateArrayS));
+        assertArrayEquals(duplicateArrayS, SelectSort.sortAsc(duplicateArray));
     }
 
     @Test
@@ -33,18 +33,18 @@ public class SelectSortTest {
 
         Integer[] singleArray = {0};
         Integer[] singleArrayS = {0};
-        assert(Arrays.equals(SelectSort.sortDesc(singleArray), singleArrayS));
+        assertArrayEquals(singleArrayS, SelectSort.sortDesc(singleArray));
 
         Integer[] array = {10, 1, 7, -3, 5};
         Integer[] arrayS = {10, 7, 5, 1, -3};
-        assert(Arrays.equals(SelectSort.sortDesc(array), arrayS));
+        assertArrayEquals(arrayS, SelectSort.sortDesc(array));
 
         Integer[] sortedArray = {100, 5, 3, 2, 1};
         Integer[] sortedArrayS = {100, 5, 3, 2, 1};
-        assert(Arrays.equals(SelectSort.sortDesc(sortedArray), sortedArrayS));
+        assertArrayEquals(sortedArrayS, SelectSort.sortDesc(sortedArray));
 
         Integer[] duplicateArray = {10, 1, 7, -3, 7};
         Integer[] duplicateArrayS = {10, 7, 7, 1, -3};
-        assert(Arrays.equals(SelectSort.sortDesc(duplicateArray), duplicateArrayS));
+        assertArrayEquals(duplicateArrayS, SelectSort.sortDesc(duplicateArray));
     }
 }

@@ -2,6 +2,9 @@
 - [General Notes](#general-notes)
 - [Select Sort](#select-sort)
 - [Insert Sort](#insert-sort)
+- [Shell Sort](#shell-sort)
+- [Bubble Sort](#bubble-sort)
+- [Merge Sort](#merge-sort)
 
 ## General Notes
 Sorting algorithms can be of 2 types regarding space used:
@@ -100,6 +103,7 @@ all elements except the last:
 - If next element is more extreme, swap elements
 - Repeat for all elements, and repeat passes until no swaps are made for
   a full pass
+  
   
 #### Complexity
 | Average      | Worst        | Best        | Space Complexity |

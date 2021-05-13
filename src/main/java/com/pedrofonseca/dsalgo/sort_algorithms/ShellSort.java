@@ -1,32 +1,34 @@
 package com.pedrofonseca.dsalgo.sort_algorithms;
 
-public class ShellSort<T extends Comparable<? super T>> {
+public class ShellSort {
 
-    public static enum SortType { ASC, DSC }
+    private static int sortModifier;
 
-    private SortType currentSortType = SortType.ASC;
-
-    public ShellSort() { }
-
-    public ShellSort(SortType pSortType) {
-        currentSortType = pSortType;
+    public static <T extends Comparable<? super T>> T[] sortAsc(T[] pArray) {
+        sortModifier = 1;
+        return sort(pArray);
     }
 
-    public T[] sort(T[] pArray) {
+    public static <T extends Comparable<? super T>> T[] sortDesc(T[] pArray) {
+        sortModifier = -1;
+        return sort(pArray);
+    }
+
+    private static <T extends Comparable<? super T>> T[] sort(T[] pArray) {
         if(pArray == null || pArray.length == 0) {
             return null;
         }
 
+        // Gradually reduce step from half length to 1
         for (int step = pArray.length / 2; step > 0; step /= 2) {
             for (int index = step; index < pArray.length; index++) {
-                T cur = pArray[index];
-                T curPrev = pArray[index - step];
-                if (currentSortType == SortType.ASC && cur.compareTo(curPrev) < 0) {
-                    pArray[index] = curPrev;
-                    pArray[index - step] = cur;
-                } else if (currentSortType == SortType.DSC && cur.compareTo(curPrev) > 0) {
-                    pArray[index] = curPrev;
-                    pArray[index - step] = cur;
+                int tmpIndex = index;
+                // Swap value with previous while index is larger than step and previous value is less extreme
+                while(tmpIndex >= step && pArray[tmpIndex].compareTo(pArray[tmpIndex - step]) * sortModifier < 0) {
+                    T tmp = pArray[tmpIndex];
+                    pArray[tmpIndex] = pArray[tmpIndex - step];
+                    pArray[tmpIndex - step] = tmp;
+                    tmpIndex -= step;
                 }
             }
         }

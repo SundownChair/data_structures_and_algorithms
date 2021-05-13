@@ -2,15 +2,15 @@ package com.pedrofonseca.dsalgo.sort_algorithms;
 
 public class BubbleSort {
 
-    private static SortEnum.SortType currentSortType;
+    private static int sortModifier;
 
     public static <T extends Comparable<? super T>> T[] sortAsc(T[] pArray) {
-        currentSortType = SortEnum.SortType.ASC;
+        sortModifier = 1;
         return sort(pArray);
     }
 
     public static <T extends Comparable<? super T>> T[] sortDesc(T[] pArray) {
-        currentSortType = SortEnum.SortType.DSC;
+        sortModifier = -1;
         return sort(pArray);
     }
 
@@ -20,10 +20,10 @@ public class BubbleSort {
         }
 
         boolean noSwap = false;
-        while (noSwap == false) {
+        while (!noSwap) {
             noSwap = true;
             for(int i = 0; i < pArray.length - 1; i++) {
-                if(pArray[i].compareTo(pArray[i+1]) * (currentSortType == SortEnum.SortType.ASC ? 1 : -1) > 0) {
+                if(pArray[i].compareTo(pArray[i+1]) * sortModifier > 0) {
                     noSwap = false;
                     T tmp = pArray[i];
                     pArray[i] = pArray[i+1];

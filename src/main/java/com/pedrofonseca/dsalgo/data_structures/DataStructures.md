@@ -507,3 +507,24 @@ such, can be used as simple BSTs. TreeMap accepts <key, value> pairs
 TreeSet accepts only values (implements 
 [Set](https://docs.oracle.com/javase/7/docs/api/java/util/Set.html)).
 
+### Graphs
+See: https://www.youtube.com/watch?v=09_LlHjoEiY  
+A graph is a collection of nodes (or vertices) and edges between them.
+Nodes are connected to each other through edges, which can be weighted
+(each edge has an associated variable traversal cost) or unweighted (all
+edges have the same traversal cost).  
+Graphs can be directed (edges can only be traversed in a specified
+direction between nodes, i.e., some nodes are linked only in one way -
+much like a one way street) or undirected (if an edge exists between two
+nodes, traversal can be done in both directions).
+
+#### Representation
+There are two common ways to represent graphs:  
+###### Adjacency Matrix
+
+###### Adjacency List
+Graphs represented by an adjacency list keep an nXn array where n is the
+number of vertices in the graph. Each node in the list represents an
+edge between the current vertex and linked vertices. Undirected graphs
+should maintain mirrored relations in all vertices, unlike directed
+graphs. Weighted edges store the their weight in the corresponding node.
