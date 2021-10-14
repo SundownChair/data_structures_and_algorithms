@@ -2,6 +2,15 @@ package com.pedrofonseca.dsalgo.data_structures;
 
 import com.pedrofonseca.dsalgo.data_structures.interfaces.IDeque;
 
+/**
+ * <p>Short for Double Ended Queue. Data Structure that can simultaneously work as a queue and a stack. Array insertion
+ * and deletion is controlled via two pointers, allowing for queueing/dequeueing and stacking/unstacking.</p>
+ * <p></p>
+ * <p>Average Access Time Complexity: O(n)<sup><i>Worst: O(n)</i></sup></p>
+ * <p>Average Search Time Complexity: O(n)<sup><i>Worst: O(n)</i></sup></p>
+ * <p>Average Insert Time Complexity: O(1)<sup><i>Worst: O(1)</i></sup></p>
+ * <p>Average Delete Time Complexity: O(1)<sup><i>Worst: O(1)</i></sup></p>
+ */
 public class ArrayDeque<T> implements IDeque<T> {
 
     private final static int MIN_SIZE = 128;
@@ -19,9 +28,6 @@ public class ArrayDeque<T> implements IDeque<T> {
         mSize = 0;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public boolean addLast(T pElement) {
         if (pElement == null) {
             return false;
@@ -49,9 +55,6 @@ public class ArrayDeque<T> implements IDeque<T> {
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public T removeLast() {
         if (mSize == 0) {
             return null;
@@ -80,9 +83,6 @@ public class ArrayDeque<T> implements IDeque<T> {
         return lReturn;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public boolean addFirst(T pElement) {
         if (pElement == null) {
             return false;
@@ -111,10 +111,6 @@ public class ArrayDeque<T> implements IDeque<T> {
         return true;
     }
 
-
-    /**
-     * {@inheritDoc}
-     */
     public T removeFirst() {
         if (mSize == 0) {
             return null;

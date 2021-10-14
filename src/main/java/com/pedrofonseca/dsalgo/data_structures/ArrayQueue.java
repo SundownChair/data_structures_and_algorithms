@@ -2,6 +2,14 @@ package com.pedrofonseca.dsalgo.data_structures;
 
 import com.pedrofonseca.dsalgo.data_structures.interfaces.IQueue;
 
+/**
+ * <p>Data Structure where data is stored and retrieved in a FIFO approach (first in/first out).</p>
+ * <p></p>
+ * <p>Average Access Time Complexity: O(n)<sup><i>Worst: O(n)</i></sup></p>
+ * <p>Average Search Time Complexity: O(n)<sup><i>Worst: O(n)</i></sup></p>
+ * <p>Average Insert Time Complexity: O(1)<sup><i>Worst: O(1)</i></sup></p>
+ * <p>Average Delete Time Complexity: O(1)<sup><i>Worst: O(1)</i></sup></p>
+ */
 public class ArrayQueue<T> implements IQueue<T> {
 
     private static final int MIN_SIZE = 5;
@@ -17,9 +25,6 @@ public class ArrayQueue<T> implements IQueue<T> {
         mBackIndex = -1;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean add(T pElement) {
         if(pElement == null) {
@@ -36,9 +41,6 @@ public class ArrayQueue<T> implements IQueue<T> {
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public T poll() {
         if (size() == 0) {
@@ -56,9 +58,6 @@ public class ArrayQueue<T> implements IQueue<T> {
         return lReturnable;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public T peek() {
         if (size() == 0) {
@@ -68,9 +67,6 @@ public class ArrayQueue<T> implements IQueue<T> {
         return mQueue[frontIndex()];
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int size() {
         return mBackIndex - mFrontIndex + 1;

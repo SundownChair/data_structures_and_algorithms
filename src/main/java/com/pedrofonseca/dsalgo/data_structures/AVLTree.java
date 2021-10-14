@@ -2,11 +2,17 @@ package com.pedrofonseca.dsalgo.data_structures;
 
 import com.pedrofonseca.dsalgo.data_structures.interfaces.ITree;
 
+/**
+ * <p>Binary Search Tree that is rebalanced (via node rotation) every operation to maintain a log(n) height (n being the
+ * number of nodes). In essence, behaves like a BST but rebalancing prevents O(n) worst cases.</p>
+ * <p></p>
+ * <p>Average Access Time Complexity: O(log(n))<sup><i>Worst: O(log(n))</i></sup></p>
+ * <p>Average Search Time Complexity: O(log(n))<sup><i>Worst: O(log(n))</i></sup></p>
+ * <p>Average Insert Time Complexity: O(log(n))<sup><i>Worst: O(log(n))</i></sup></p>
+ * <p>Average Delete Time Complexity: O(log(n))<sup><i>Worst: O(log(n))</i></sup></p>
+ */
 public class AVLTree<T extends Comparable<? super T>> extends BinarySearchTree<T> implements ITree<T>  {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean add(T pValue) {
         if (pValue == null) {

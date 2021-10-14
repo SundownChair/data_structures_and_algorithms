@@ -2,6 +2,16 @@ package com.pedrofonseca.dsalgo.sort_algorithms;
 
 import java.util.ArrayList;
 
+/**
+ * <p>Only used for numeric sorting (usually positive integers). Sorting is done by applying counting sort from the least
+ * significant digit to the most significant one (therefore only using 10 buckets for the range 0-9).</p>
+ * <p></p>
+ * <p>See <a href="https://www.youtube.com/watch?v=nu4gDuFabIM">https://www.youtube.com/watch?v=nu4gDuFabIM</a></p>
+ * <p></p>
+ * <b><p>Average Time Complexity: O(nk)</p></b>
+ * <p>Worst Time Complexity: O(nk)</p>
+ * <p>Best Time Complexity: O(nk)</p>
+ */
 public class RadixSort {
 
     private static int indexModifier;

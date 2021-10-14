@@ -1,5 +1,17 @@
 package com.pedrofonseca.dsalgo.sort_algorithms;
 
+/**
+ * <p>In a gradually increasing interval, place the first element outside of the interval in its correct position. The
+ * interval is then increased by 1 and the process iterated until the array is sorted.</p>
+ * <p>Suited only for small arrays or nearly sorted arrays since it moves elements frequently (the same element can be
+ * swapped multiple times).</p>
+ * <p></p>
+ * <p>See <a href="https://www.youtube.com/watch?v=OGzPmgsI-pQ">https://www.youtube.com/watch?v=OGzPmgsI-pQ</a></p>
+ * <p></p>
+ * <b><p>Average Time Complexity: O(n²)</p></b>
+ * <p>Worst Time Complexity: O(n²)</p>
+ * <p>Best Time Complexity: O(n)</p>
+ */
 public class InsertSort {
 
     private static int sortModifier;

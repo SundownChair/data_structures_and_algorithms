@@ -1,5 +1,17 @@
 package com.pedrofonseca.dsalgo.sort_algorithms;
 
+/**
+ * <p>Compares adjacent elements in an array and swaps elements if the leftmost is more extreme than the rightmost.
+ * Every iteration is sure to leave the most extreme element in the last position of the array, so the next iteration
+ * decreases the working range by one position (ie. run 1: 0 to n; run 2: 0 to n-1, element at n is the most
+ * extreme).</p>
+ * <p></p>
+ * <p>See <a href="https://www.youtube.com/watch?v=nmhjrI-aW5o">https://www.youtube.com/watch?v=nmhjrI-aW5o</a></p>
+ * <p></p>
+ * <b><p>Average Time Complexity: O(n²)</p></b>
+ * <p>Worst Time Complexity: O(n²)</p>
+ * <p>Best Time Complexity: O(n)</p>
+ */
 public class BubbleSort {
 
     private static int sortModifier;

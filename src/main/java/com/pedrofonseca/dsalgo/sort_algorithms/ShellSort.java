@@ -1,5 +1,16 @@
 package com.pedrofonseca.dsalgo.sort_algorithms;
 
+/**
+ * <p>Sorting algorithm where elements are compared distanced by an interval instead of being adjacent. This interval is
+ * reduced every iteration until one pass is made that checks adjacent elements (interval of 1). Elements are checked
+ * until either no swap is made or the interval is larger than the remaining amount of elements in the array.</p>
+ * <p></p>
+ * <p>See <a href="https://www.youtube.com/watch?v=SHcPqUe2GZM">https://www.youtube.com/watch?v=SHcPqUe2GZM</a></p>
+ * <p></p>
+ * <b><p>Average Time Complexity: O(n log(n)²)</p></b>
+ * <p>Worst Time Complexity: O(n log(n)²)</p>
+ * <p>Best Time Complexity: O(n log(n))</p>
+ */
 public class ShellSort {
 
     private static int sortModifier;

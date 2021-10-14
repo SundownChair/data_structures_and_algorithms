@@ -2,15 +2,23 @@ package com.pedrofonseca.dsalgo.data_structures;
 
 import com.pedrofonseca.dsalgo.data_structures.interfaces.ILinkedList;
 
+/**
+ * <p>Linear, non contiguous data structure where node's link to both the element before and after. Unlike singly linked
+ * lists, operations that require the previous node are simplified but both pointers must be maintained (and also take
+ * more space). Unlike arrays, inserting/deleting nodes does not shifting remaining elements, making it O(1) (assuming
+ * the proper nodes are found), making it preferable for frequent insertions/deletions rather than frequent access.</p>
+ * <p></p>
+ * <p>Average Access Time Complexity: O(n)<sup><i>Worst: O(n)</i></sup></p>
+ * <p>Average Search Time Complexity: O(n)<sup><i>Worst: O(n)</i></sup></p>
+ * <p>Average Insert Time Complexity: O(1)<sup><i>Worst: O(n)</i></sup></p>
+ * <p>Average Delete Time Complexity: O(1)<sup><i>Worst: O(n)</i></sup></p>
+ */
 public class DoublyLinkedList<T> implements ILinkedList<T> {
 
     private int mSize = 0;
     private Node<T> mHead = null;
     private Node<T> mTail = null;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean add(T pElement) {
         if (pElement == null) {
@@ -32,9 +40,6 @@ public class DoublyLinkedList<T> implements ILinkedList<T> {
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @SuppressWarnings("unchecked")
     public boolean addAt(T pElement, int pIndex) {
@@ -67,9 +72,6 @@ public class DoublyLinkedList<T> implements ILinkedList<T> {
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean push(T pElement) {
         if (pElement == null) {
@@ -89,25 +91,16 @@ public class DoublyLinkedList<T> implements ILinkedList<T> {
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public T peekFirst() {
         return mSize > 0 ? mHead.value : null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public T peekLast() {
         return mSize > 0 ? mTail.value : null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public T popFirst() {
         if(mSize == 0) {
@@ -122,9 +115,6 @@ public class DoublyLinkedList<T> implements ILinkedList<T> {
         return lReturn.value;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public T popLast() {
         if(mSize == 0) {
@@ -139,17 +129,11 @@ public class DoublyLinkedList<T> implements ILinkedList<T> {
         return lReturn.value;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int size() {
         return mSize;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public T get(int pIndex) {
         Node<T> lCurrent = mHead;
@@ -164,9 +148,6 @@ public class DoublyLinkedList<T> implements ILinkedList<T> {
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public T popAt(int pIndex) {
         Node<T> lCurrent = mHead;
@@ -193,9 +174,6 @@ public class DoublyLinkedList<T> implements ILinkedList<T> {
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean contains(T pElement) {
         if(pElement == null) {
@@ -214,9 +192,6 @@ public class DoublyLinkedList<T> implements ILinkedList<T> {
         return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void reverse() {
         Node<T> lCurrent = mHead;

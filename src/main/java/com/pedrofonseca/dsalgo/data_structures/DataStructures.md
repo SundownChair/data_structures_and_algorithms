@@ -8,10 +8,17 @@ with my notes on them.
 - [Stack](#stack)
 - [Deque](#deque)
 - [Heap](#heap)
+- [Priority Queue](#priority-queue)
 - [LinkedList](#linked-list)
+- [Skip List]() - ToDo (document. implement?)
+- [HashMap]() - ToDo (document. implement?)
 - [Trees](#trees)
 - [Binary Search Tree](#binary-search-tree)
 - [AVL Tree](#avl-tree)
+- [Reb-Black Tree]() - ToDo (document. implement?)
+- [Graphs]() - ToDo (document)
+
+
 
 ## Array
 #### What is it?
@@ -41,6 +48,8 @@ Native Java arrays.
 int[] array = new int[10];
 int[][] jaggedArray = {{1, 2}, {1, 2, 3}};
 ```  
+
+
 
 ## Vector
 #### What is it?
@@ -79,6 +88,8 @@ List synchronizedArrayList = Collections.synchronizedList(new ArrayList(...));
 ```
 Both ArrayList and Vector are dynamically sized, but ArrayList increases
 buffer size by 50% increments, while Vector does so by 100%.
+
+
 
 ## Queue
 #### What is it?
@@ -122,6 +133,8 @@ benefits from the optimization of circular queues.
 Queue queue = new LinkedList();
 ```
 
+
+
 ## Stack
 #### What is it?
 Data structure where data is stored according to a LIFO (last in, first
@@ -156,6 +169,8 @@ faces no size limitations.
 #### Java Implementation
 [Stack](https://docs.oracle.com/javase/7/docs/api/java/util/Stack.html)
 class.
+
+
 
 ## Deque
 #### What is it?
@@ -194,23 +209,23 @@ interface implemented through
 [Linked List](https://docs.oracle.com/javase/7/docs/api/java/util/LinkedList.html)
 (for a linked list based deque).
 
+
+
 ## Heap   
 #### What is it?
-A Priority Queue is a data structure that can be implemented through
-arrays (sorted or unsorted), linked lists, trees, and so forth.
-Regardless of performance, a Priority Queue must always pop the most
-extreme value it currently contains (maximum or minimum, calculated
-through whatever criteria was set for the queue). However, performance
-can vary depending on implementation.  
-Heaps are a specific implementation of Priority Queues. Heaps are
-represented as complete binary trees (all levels are full, except for
-possibly the last one). As complete trees, they can be implemented
-through an array instead of a tree - operational complexity is the same,
-but trees have higher constant factors (a tree node takes more memory
-than an array index).  
-The most extreme value is always the root of the tree, which is valid
-for all subtrees. MaxHeaps have the largest value at the root, and
-MinHeaps the smallest.
+A Heap is a tree based data structure that satisfies the heap invariant:
+for all nodes, the value of the parent node is always more or equally
+extreme to its child nodes. Heaps can be represented by arrays, linked
+lists, trees, and so forth, and must contain data that is in some way
+comparable. A common implementation of heap is as complete binary trees
+(all levels are full, except for possibly the last one), which, as
+complete trees, can be implemented through an array instead of a tree -
+operational complexity is the same, but trees have higher constant
+factors (a tree node takes more memory than an array index).   
+The heap invariant ensures that the most extreme value is always the
+root of the tree, which is valid for all subtrees. MaxHeaps have the
+largest value at the root, and MinHeaps the smallest. This makes getting
+the "next best/worst" element trivial.
 
 #### Implementation
 Heaps are implemented through arrays, being filled progressively. Given
@@ -233,7 +248,7 @@ tree on insert and on delete:
 #### Average Complexities
 | Access | Search | Insert     | Delete     |
 |--------|--------|------------|------------|
-| O(1)   | O(n)   | O(log n)   | O(log n)   |
+| O(1)   | O(log n)   | O(log n)   | O(log n)   |
 
 **Notes on Complexity**
 - Access is usually performed only at root level to get the most extreme
@@ -242,12 +257,15 @@ tree on insert and on delete:
   element is the most extreme one. Other elements have to be searched by
   iterating through the array (O(n)).  
 - Insert is always performed at the first empty index, which is O(1).
-  However, it must then be "heapified up" the heap, making it O(log n).  
+  However, it must then be "heapified up" the heap, making it O(log n).
 - Delete is usually only used at root level by removing the root and
   placing the last element of the heap at root. It is then heapified
   down, making it O(log n). Deleting an element other than root is a non
   standard operation which would be O(n), since the value would have to
-  be searched first.     
+  be searched first.
+- Above complexities consider a naive Binary Heap. Many heap
+  implementations exist, with different complexities. See
+  [here](https://en.wikipedia.org/wiki/Heap_(data_structure)).
   
 #### Java Implementation
 [PriorityQueue](https://docs.oracle.com/javase/7/docs/api/java/util/PriorityQueue.html)
@@ -256,6 +274,51 @@ of the Collection :
 ```java
 PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
 ```
+
+
+
+## Priority Queue
+#### What is it?
+A Priority Queue is an abstract datatype similar to a queue with the
+exception that each element has a certain priority. The priority is used
+to determine the order in which elements are removed from the Priority
+Queue. Stored data must be comparable.  
+A common way to implement Priority Queues is through heaps, since the
+operations it optimizes are the same operations a Priority Queue needs
+to implement.  
+An Indexed Priority Queue an internal index to map elements to their
+location in the queue (like a Hash Table). The index is updated whenever
+the queue is manipulated, and ensures that search time complexity is
+O(1), and in turn, operations like deleting an element not at the tree's
+root will be O(log n).
+
+#### Average Complexities
+| Access | Search | Insert     | Delete     |
+|--------|--------|------------|------------|
+| O(1)   | O(1)   | O(log n)   | O(log n)   |
+
+**Notes on Complexity**
+- Much like heaps, implementations for Priority Queues vary, which in
+  turn impacts complexity. Above priorities are for a naive
+  implementation of and Indexed Priority Queue via Binary Heap. See
+  [here](https://en.wikipedia.org/wiki/Priority_queue).
+
+#### Java Implementation
+[PriorityQueue](https://docs.oracle.com/javase/7/docs/api/java/util/PriorityQueue.html)
+class. By default, priority is assigned based on the native comparison
+of the given object (much like a Heap), but custom Comparators can be
+passed in:
+```java
+// Default priority queue will assign priority based on element comparison
+PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+// Custom comparators can be passed in to assign priority based on other factors
+Comparator<CustomObj> customCmp = new Comparator<CustomObj> {
+    public int compare(CustomObj p1, CustomObj p2) {...}
+};
+PriorityQueue<Integer> pq = new PriorityQueue<>(customCmp);
+```
+
 
 ## Linked List
 #### What is it?
@@ -307,6 +370,8 @@ also implement LinkedList (as well as
 respectively). However, consider the different complexities and
 behaviours of hash maps and hash sets.
 
+
+
 ## Trees
 #### What are they?
 Trees are datastructures that represent and organize data in linked
@@ -325,6 +390,8 @@ Besides common data structures (Binary Search Trees, AVL Trees,
 Red-Black Trees, etc), other specialized structures can be created using
 trees. One example would be Expression Trees, which can both read, write
 and solve postfix expressions.
+
+
 
 ## Binary Search Tree
 #### What is it?
@@ -428,6 +495,8 @@ such, can be used as simple BSTs. TreeMap accepts <key, value> pairs
 TreeSet accepts only values (implements 
 [Set](https://docs.oracle.com/javase/7/docs/api/java/util/Set.html)).
 
+
+
 ## AVL Tree
 #### What is it?
 Self balancing binary tree based on tree height (see below). For the
@@ -507,7 +576,66 @@ such, can be used as simple BSTs. TreeMap accepts <key, value> pairs
 TreeSet accepts only values (implements 
 [Set](https://docs.oracle.com/javase/7/docs/api/java/util/Set.html)).
 
-### Graphs
+
+
+## Union-Find
+#### What is it?
+A Union-Find (also known as a Disjoint Set or Merge-Find Set) is a data
+structure that keeps track of a set of elements split into one or more
+disjoint sets.  
+There are two main operations performed by Union-Find:
+ - Find: determines which subset a given elements belongs to. It usually
+   returns the root element of a subset - is two elements share a root,
+   they are part of the same subset.
+-  Union: joins two subsets into a single subset.
+
+#### Average Complexities
+| Union    | Find     |
+|----------|----------|
+| O(α(n))  | O(α(n))  |
+
+**Notes on Complexity**
+- Time complexity is near constant only when Path Compression and Union
+  by Size (or rank) are used. If Path Compression is not used, O(log n)
+  is the worst case scenario; if Union by Size is also not used, then
+  worst case scenario is O(n).
+
+#### Union by Size
+Naive union simply joins two sets randomly (i.e. first set always joins
+the second one, and so forth). Applying Union by Size removes this
+randomness, ensuring that the "smaller" tree will be attached to the
+"bigger" tree.  
+Multiple heuristics can be used to determine which tree is "bigger".
+Size of the tree can be used as rank (the larger tree being the one with
+more elements), as can tree depth (though tree depth should be
+considered as an upper bound, since Path Compression will decrease the
+depth).  
+Complexity with only Union by Size is O(log n) (see
+[here](https://cs.stackexchange.com/questions/96401/why-time-complexity-of-union-find-is-olgn-with-only-union-by-rank)).
+
+#### Path Compression
+The naive find operation checks element's parent nodes until root is
+reached. Unlike graphs/trees, the relationship between nodes is not very
+important after performing a union, since they'll be represented as a
+set by the same root (e.g. the distinction between A->B->C and B->->C is
+mostly irrelevant if you consider that A and B will always belong to the
+set with C as root).  
+Path Compression makes it so that elements in a set circumvent all
+others nodes by setting root as the parent of most elements in a set (in
+the previous example A->B->C, B->A->C are equivalent to A->C and B->C).
+This makes the find operation tend to O(1) complexity when paired with
+Union by Size.
+
+#### Java Implementation
+There are no native implementations for Union-Find. An approximation can
+be done through the
+[disjoint](https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Collections.html#disjoint%28java.util.Collection,java.util.Collection%29)
+method in Collections if it is only required to know if two elements
+exist in different sets.
+
+
+
+## Graphs
 See: https://www.youtube.com/watch?v=09_LlHjoEiY  
 A graph is a collection of nodes (or vertices) and edges between them.
 Nodes are connected to each other through edges, which can be weighted
@@ -521,6 +649,7 @@ nodes, traversal can be done in both directions).
 #### Representation
 There are two common ways to represent graphs:  
 ###### Adjacency Matrix
+
 
 ###### Adjacency List
 Graphs represented by an adjacency list keep an nXn array where n is the

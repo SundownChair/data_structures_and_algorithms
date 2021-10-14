@@ -14,32 +14,32 @@ public class ArrayHeapTest {
 
     @Test
     public void testAdd() {
-        assert(mTestedClass.add(1));
-        assert(mTestedClass.add(2));
+        mTestedClass.add(1);
+        mTestedClass.add(2);
         assert(mTestedClass.size() == 2);
     }
 
     @Test
-    public void testGetHead() {
+    public void testpeek() {
         mTestedClass.add(1);
         mTestedClass.add(2);
-        assert(mTestedClass.getHead() == 1);
+        assert(mTestedClass.peek() == 1);
         assert(mTestedClass.size() == 2);
     }
 
     @Test
-    public void testRemoveHead() {
+    public void testpoll() {
         mTestedClass.add(1);
         mTestedClass.add(2);
-        assert(mTestedClass.removeHead() == 1);
+        assert(mTestedClass.poll() == 1);
         assert(mTestedClass.size() == 1);
     }
 
     @Test
     public void testNull() {
-        assert(!mTestedClass.add(null));
-        assert(mTestedClass.getHead() == null);
-        assert(mTestedClass.removeHead() == null);
+        mTestedClass.add(null);
+        assert(mTestedClass.peek() == null);
+        assert(mTestedClass.poll() == null);
         assert(mTestedClass.size() == 0);
     }
 
@@ -47,9 +47,9 @@ public class ArrayHeapTest {
     public void testHeapifyUp() {
         mTestedClass.add(3);
         mTestedClass.add(2);
-        assert(mTestedClass.getHead() == 2);
+        assert(mTestedClass.peek() == 2);
         mTestedClass.add(1);
-        assert(mTestedClass.getHead() == 1);
+        assert(mTestedClass.peek() == 1);
     }
 
     @Test
@@ -58,9 +58,9 @@ public class ArrayHeapTest {
             mTestedClass.add(i);
         }
         mTestedClass.add(0);
-        assert(mTestedClass.getHead() == 0);
+        assert(mTestedClass.peek() == 0);
         for (int i = 0; i <= 1024; i++ ) {
-            assert(mTestedClass.removeHead() == i);
+            assert(mTestedClass.poll() == i);
         }
     }
 
@@ -69,9 +69,9 @@ public class ArrayHeapTest {
         for (int i = 1024; i >= 0; i--) {
             mTestedClass.add(i);
         }
-        assert(mTestedClass.getHead() == 0);
+        assert(mTestedClass.peek() == 0);
         for (int i = 0; i <= 1024; i++) {
-            assert(mTestedClass.removeHead() == i);
+            assert(mTestedClass.poll() == i);
         }
     }
 }

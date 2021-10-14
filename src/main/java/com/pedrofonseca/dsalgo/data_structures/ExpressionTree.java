@@ -4,6 +4,10 @@ import com.pedrofonseca.dsalgo.data_structures.interfaces.IExpressionTree;
 
 import java.util.*;
 
+/**
+ * <p>Tree structure capable of reading and storing expressions in postfix notation (operations are tree nodes while
+ * operands are leafs). Can print in either natural or postfix notation, or solve the stored expression.</p>
+ */
 public class ExpressionTree implements IExpressionTree<Double> {
 
     private Node mTree;
@@ -19,9 +23,6 @@ public class ExpressionTree implements IExpressionTree<Double> {
         mVariables = new HashMap<>();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean readPostfix(String pExpression) {
         if(pExpression == null || pExpression.isEmpty()) {
@@ -32,9 +33,6 @@ public class ExpressionTree implements IExpressionTree<Double> {
         return readPostfix(lList);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean readPostfix(Collection<String> pExpression) {
         if(pExpression == null || pExpression.isEmpty()) {
@@ -95,9 +93,6 @@ public class ExpressionTree implements IExpressionTree<Double> {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String printPostfix() {
         return printPostFix(mTree);
@@ -120,9 +115,6 @@ public class ExpressionTree implements IExpressionTree<Double> {
         return exp.toString();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String printNatural() {
         return printNatural(mTree);
@@ -131,7 +123,7 @@ public class ExpressionTree implements IExpressionTree<Double> {
     /**
      * Inner recursive postfix notation creation function. An in-order traversal of the tree.
      * @param pNode Current node.
-     * @return Current resukt.
+     * @return Current result.
      */
     private String printNatural(Node pNode) {
         if (pNode == null) {
@@ -154,9 +146,6 @@ public class ExpressionTree implements IExpressionTree<Double> {
         return exp.toString();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Double solve() {
         if (mTree == null) {
@@ -205,9 +194,6 @@ public class ExpressionTree implements IExpressionTree<Double> {
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public boolean defineVariable(String pKey, Double pValue) {
         if(mVariables.containsKey(pKey)) {
             mVariables.put(pKey, pValue);

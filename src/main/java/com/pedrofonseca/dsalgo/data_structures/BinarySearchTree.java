@@ -5,6 +5,16 @@ import com.pedrofonseca.dsalgo.data_structures.interfaces.ITree;
 import java.lang.reflect.Array;
 import java.util.*;
 
+/**
+ * <p>Tree structure where every node has a parent node (except root) and at most two child nodes - where the left
+ * node's value is less extreme than the parent's and the right one's more. Not forcibly a complete tree. Can be
+ * binary searched (hence the name).</p>
+ * <p></p>
+ * <p>Average Access Time Complexity: O(log(n))<sup><i>Worst: O(n)</i></sup></p>
+ * <p>Average Search Time Complexity: O(log(n))<sup><i>Worst: O(n)</i></sup></p>
+ * <p>Average Insert Time Complexity: O(log(n))<sup><i>Worst: O(n)</i></sup></p>
+ * <p>Average Delete Time Complexity: O(log(n))<sup><i>Worst: O(n)</i></sup></p>
+ */
 public class BinarySearchTree<T extends Comparable<? super T>> implements ITree<T> {
 
     protected int mSize;
@@ -19,9 +29,6 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements ITree<
         mRoot = null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean add(T pValue) {
         if (pValue == null) {
@@ -159,9 +166,6 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements ITree<
         mSize = 0;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public T remove(T pValue) {
         Node<T> nodeToRemove = get(pValue);
@@ -264,17 +268,11 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements ITree<
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int size() {
         return mSize;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean contains(T pValue) {
         if (pValue == null) {
@@ -284,9 +282,6 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements ITree<
         }
     }
 
-    /**
-     * Rebuilds tree to logarithmic height.
-     */
     public void balance() {
         List<T> lOrderedList = getDepthFirstTraversal(DfsOrder.inOrder);
         clear();
@@ -460,9 +455,6 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements ITree<
                     (right != null ? right.height : 0);
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public int compareTo(Node<L> o) {
             return value.compareTo(o.value);

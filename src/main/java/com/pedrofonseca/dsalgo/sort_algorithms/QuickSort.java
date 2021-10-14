@@ -1,5 +1,16 @@
 package com.pedrofonseca.dsalgo.sort_algorithms;
 
+/**
+ * <p>Divide and conquer sorting algorithm that splits an array into two halves with a pivot element in the middle.
+ * Depending on implementation, all elements in the left half are less extreme that the pivot and the right ones more,
+ * or vice-versa. It recursively selects and sorts the pivot element, and then sorts the left and right halves.</p>
+ * <p></p>
+ * <p>See <a href="https://www.youtube.com/watch?v=PgBzjlCcFvc">https://www.youtube.com/watch?v=PgBzjlCcFvc</a></p>
+ * <p></p>
+ * <b><p>Average Time Complexity: O(n log(n))</p></b>
+ * <p>Worst Time Complexity: O(n²)</p>
+ * <p>Best Time Complexity: O(n log(n))</p>
+ */
 public class QuickSort {
 
     private static int sortModifier;

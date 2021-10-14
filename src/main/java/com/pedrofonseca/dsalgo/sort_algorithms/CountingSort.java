@@ -1,5 +1,17 @@
 package com.pedrofonseca.dsalgo.sort_algorithms;
 
+/**
+ * <p>For n elements to sort, determine max and min values values and create k buckets with counters at 0
+ * (k = abs(min - max)). Traverse given array, increasing the corresponding bucket by 1 at every occurrence. Finally,
+ * traverse the bucket list in order, adding to the return element the corresponding key an equal amount of times to
+ * its counter.</p>
+ * <p></p>
+ * <p>See <a href="https://www.youtube.com/watch?v=7zuGmKfUt7s">https://www.youtube.com/watch?v=7zuGmKfUt7s</a></p>
+ * <p></p>
+ * <b><p>Average Time Complexity: O(n+k)</p></b>
+ * <p>Worst Time Complexity: O(n+k)</p>
+ * <p>Best Time Complexity: O(n+k)</p>
+ */
 public class CountingSort {
 
     private static int sortModifier;

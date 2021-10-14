@@ -5,8 +5,12 @@ import com.pedrofonseca.dsalgo.data_structures.interfaces.IHeap;
 import java.util.Arrays;
 
 /**
- * Min Heap implementation.
- * @param <T>
+ * <p>Array based Priority Queue that always keeps the most extreme element ready for access.</p>
+ * <p></p>
+ * <p>Average Access Time Complexity: O(1)<sup><i>Worst: O(1)</i></sup></p>
+ * <p>Average Search Time Complexity: O(n)<sup><i>Worst: O(n)</i></sup></p>
+ * <p>Average Insert Time Complexity: O(log(n))<sup><i>Worst: O(log(n))</i></sup></p>
+ * <p>Average Delete Time Complexity: O(log(n))<sup><i>Worst: O(log(n))</i></sup></p>
  */
 public class ArrayHeap<T extends Comparable<? super T>> implements IHeap<T> {
 
@@ -19,7 +23,17 @@ public class ArrayHeap<T extends Comparable<? super T>> implements IHeap<T> {
     private HeapType mType;
 
     public static enum HeapType{
-        Min, Max
+        Min(-1), Max(1);
+
+        private int modifier;
+
+        private HeapType(int pModifier) {
+            modifier = pModifier;
+        }
+
+        public int getModifier() {
+            return modifier;
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -33,13 +47,10 @@ public class ArrayHeap<T extends Comparable<? super T>> implements IHeap<T> {
         this(HeapType.Min);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public boolean add(T pElement) {
+    public void add(T pElement) {
         if(pElement == null)  {
-            return false;
+            return;
         }
 
         if (mSize >= mHeap.length) {
@@ -50,14 +61,11 @@ public class ArrayHeap<T extends Comparable<? super T>> implements IHeap<T> {
         heapifyUp(mSize);
         mSize++;
 
-        return true;
+        return;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public T getHead() {
+    public T peek() {
         if (mSize == 0) {
             return null;
         }
@@ -65,11 +73,8 @@ public class ArrayHeap<T extends Comparable<? super T>> implements IHeap<T> {
         return mHeap[0];
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public T removeHead() {
+    public T poll() {
         if (mSize == 0) {
             return null;
         }
@@ -88,9 +93,6 @@ public class ArrayHeap<T extends Comparable<? super T>> implements IHeap<T> {
         return lHead;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int size() {
         return mSize;

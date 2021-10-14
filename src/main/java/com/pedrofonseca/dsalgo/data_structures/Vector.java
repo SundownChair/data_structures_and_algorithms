@@ -4,6 +4,17 @@ import com.pedrofonseca.dsalgo.data_structures.interfaces.IVector;
 
 import java.util.Arrays;
 
+/**
+ * <p>Dynamic array that changes total size based on how many elements it contains, preventing a situation where no more
+ * elements can be added. Functionally an array, with the notable exception that if adding/deleting an element triggers
+ * a resize of the vector, the operation is O(n) instead; and that inserting/deleting elements by index will shift the
+ * array accordingly.</p>
+ * <p></p>
+ * <p>Average Access Time Complexity: O(1)<sup><i>Worst: O(1)</i></sup></p>
+ * <p>Average Search Time Complexity: O(n)<sup><i>Worst: O(n)</i></sup></p>
+ * <p>Average Insert Time Complexity: O(n)<sup><i>Worst: O(n)</i></sup></p>
+ * <p>Average Delete Time Complexity: O(n)<sup><i>Worst: O(n)</i></sup></p>
+ */
 public class Vector<T> implements IVector<T> {
 
     private static final int STARTING_SIZE = 5;
@@ -17,9 +28,6 @@ public class Vector<T> implements IVector<T> {
         mSize = 0;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void add(T pValue) {
         mArray[mSize] = pValue;
@@ -28,9 +36,6 @@ public class Vector<T> implements IVector<T> {
         resize();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void insert(int pIndex, T pValue) {
         indexCheck(pIndex);
@@ -48,9 +53,6 @@ public class Vector<T> implements IVector<T> {
         resize();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public T remove(int pIndex) {
         indexCheck(pIndex);
@@ -70,9 +72,6 @@ public class Vector<T> implements IVector<T> {
         return lReturnable;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public T remove(T pValue) {
         T lReturnable = null;
@@ -87,9 +86,6 @@ public class Vector<T> implements IVector<T> {
         return lReturnable;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public T get(int pIndex) {
         indexCheck(pIndex);
@@ -97,9 +93,6 @@ public class Vector<T> implements IVector<T> {
         return mArray[pIndex];
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int getIndex(T pValue) {
         for (int index = 0; index < mSize; index++) {
@@ -110,9 +103,6 @@ public class Vector<T> implements IVector<T> {
         return -1;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public T get(T pValue) {
         for (T ele : mArray) {
@@ -123,9 +113,6 @@ public class Vector<T> implements IVector<T> {
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int size() {
         return mSize;
@@ -136,9 +123,6 @@ public class Vector<T> implements IVector<T> {
         return mArray.length;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void reverse() {
 

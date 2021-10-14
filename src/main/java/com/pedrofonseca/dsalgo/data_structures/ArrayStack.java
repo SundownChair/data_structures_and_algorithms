@@ -4,6 +4,14 @@ import com.pedrofonseca.dsalgo.data_structures.interfaces.IStack;
 
 import java.util.Arrays;
 
+/**
+ * <p>Data Strcuture where data is stored and retrieved in a LIFO approach (last in/first out).</p>
+ * <p></p>
+ * <p>Average Access Time Complexity: O(n)<sup><i>Worst: O(n)</i></sup></p>
+ * <p>Average Search Time Complexity: O(n)<sup><i>Worst: O(n)</i></sup></p>
+ * <p>Average Insert Time Complexity: O(1)<sup><i>Worst: O(1)</i></sup></p>
+ * <p>Average Delete Time Complexity: O(1)<sup><i>Worst: O(1)</i></sup></p>
+ */
 public class ArrayStack<T> implements IStack<T> {
 
     private T[] mStack;

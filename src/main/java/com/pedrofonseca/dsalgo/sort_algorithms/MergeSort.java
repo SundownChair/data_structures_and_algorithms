@@ -1,9 +1,18 @@
 package com.pedrofonseca.dsalgo.sort_algorithms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+/**
+ * <p>Divide and conquer sorting algorithm that splits the array in two halves, recursively calls itself for both and
+ * then merges them back together.</p>
+ * <p></p>
+ * <p>See <a href="https://www.youtube.com/watch?v=JSceec-wEyw">https://www.youtube.com/watch?v=JSceec-wEyw</a></p>
+ * <p></p>
+ * <b><p>Average Time Complexity: O(n log(n))</p></b>
+ * <p>Worst Time Complexity: O(n log(n))</p>
+ * <p>Best Time Complexity: O(n log(n))</p>
+ */
 public class MergeSort {
 
     private static int sortModifier;

@@ -5,29 +5,29 @@ public interface IHeap<T extends Comparable<? super T>> {
     /**
      * Add value to the heap.
      *
-     * @param pElement Element to add
-     * @return true if element correctly added to heap; false otherwise.
+     * @param pElement Element to add.
+     * @return true if element correctly added to heap; false otherwise.5
      */
-    boolean add(T pElement);
+    void add(T pElement);
 
     /**
      * Returns head element from heap (most extreme value). Returns null if heap is empty.
      *
-     * @return Most extreme element on heap
+     * @return Most extreme element on heap.
      */
-    T getHead();
+    T peek();
 
     /**
      * Removes and returns head from heap (most extreme value). Returns null if heap id empty.
      *
-     * @return Most extreme element on heap
+     * @return Most extreme element on heap.
      */
-    T removeHead();
+    T poll();
 
     /**
      * Returns current amount of elements on the Heap.
      *
-     * @return int number of elements contained
+     * @return int number of elements contained.
      */
     int size();
 }

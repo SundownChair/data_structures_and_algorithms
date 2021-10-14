@@ -1,10 +1,16 @@
 # Table of Contents:
 - [General Notes](#general-notes)
+- [QuickSort](#) - ToDo (document)
 - [Select Sort](#select-sort)
 - [Insert Sort](#insert-sort)
 - [Shell Sort](#shell-sort)
 - [Bubble Sort](#bubble-sort)
 - [Merge Sort](#merge-sort)
+- [Counting Sort](#) - ToDo (document)
+- [Radix Sort](#) - ToDo (document)
+- [Heap Sort](#) - ToDo (document)
+- [Topological Sort](#topological-sort)
+
 
 ## General Notes
 Sorting algorithms can be of 2 types regarding space used:
@@ -137,3 +143,48 @@ Given an unordered array a:
   inline, but becomes more complex)
 - Performance is fixed. No difference in execution complexity when
   applied to a non ordered vs an ordered array.
+  
+## Topological Sort
+A.k.a TopSort. Precedence relationships can be modelled with directed 
+graphs (i.e. dependencies A and B must  be loaded for dependency C to 
+load, so A->C and B->C). TopSort is an algorithm that returns a 
+topological ordering on a directed graph. Topological orderings are not 
+unique, since many permutation can fulfil the topological criteria 
+(in the previous example, it makes no difference if A is loaded before 
+or after B, as long as C is loaded after both).   
+Only Directed Acyclic Graphs(DAGs) can be topologically ordered - 
+cyclical dependencies have no defined start and end point (if A is 
+needed to load B, B is needed to load C, and C is needed to load A, 
+there is no possible load order) - to verify that a graphs does not 
+contain a directed cycle, use algorithms like Tarjan's Strongly 
+Connected Component. Trees are by design DAGs - to topologically order a
+ tree, iteratively remove leaf nodes.
+
+#### Algorithm
+Given graph "graph", call: 
+```
+n = graph.numOfNodes()
+visited = [false, ..., false] // n length
+topOrder = [null, ..., null] // n length
+i = n - 1
+		
+for(at = 0; at < n; at++)
+  if(visited(at) == false)
+  iterVisited = []
+  dfs(at, visited, iterVisited, graph)
+  // performs dfs starting at "at" node, updating visited with all visited nodes
+  // and adding to iterVisited all nodes reached in reverse order (farthest nodes first)
+  for node in iterVisited
+    topOrder[i--] = node // fills topological order from end to start
+return topOrder
+```
+  
+#### Complexity
+| Average      | Worst        | Best        | Space Complexity |
+|--------------|--------------|-------------|------------------|
+| O(v + e)     | O(v + e)     | O(v + e)    | O(v + e) or O(v²)|
+
+**Notes on Complexity**
+- v stands for vertices, e stands for edges
+- Space complexity depends on the graph used: O(v + e) for an Adjacency
+  Lists; O(v²) for an Adjacency Matrix

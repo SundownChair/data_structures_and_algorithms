@@ -1,5 +1,16 @@
 package com.pedrofonseca.dsalgo.sort_algorithms;
 
+/**
+ * <p>On each iteration, set a pointer to index = 0+i (where i is the current iteration, starting at 0) and compare all
+ * elements from index to n, setting the most extreme at index. Repeat until array is sorted.</p>
+ * <p>Similar to Insert Sort, but worst case scenario will still perform a full scan, even if no swaps are made.</p>
+ * <p></p>
+ * <p>See <a href="https://www.youtube.com/watch?v=xWBP4lzkoyM">https://www.youtube.com/watch?v=xWBP4lzkoyM</a></p>
+ * <p></p>
+ * <b><p>Average Time Complexity: O(n²)</p></b>
+ * <p>Worst Time Complexity: O(n²)</p>
+ * <p>Best Time Complexity: O(n²)</p>
+ */
 public class SelectSort {
 
     private static int sortModifier;

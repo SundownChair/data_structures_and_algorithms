@@ -58,7 +58,7 @@ public interface ILinkedList<T> {
     /**
      * Returns the number of elements currently contained in the list.
      *
-     * @return
+     * @return Number of elements.
      */
     int size();
 
