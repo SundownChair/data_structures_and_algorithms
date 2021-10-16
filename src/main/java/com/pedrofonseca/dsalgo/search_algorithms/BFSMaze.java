@@ -7,7 +7,8 @@ import java.util.Queue;
 
 /**
  * Simple maze solver that applies BFS directly in array. Implementation only detects if path exists from start to end,
- * but can be expanded to have move memory like {@link com.pedrofonseca.dsalgo.search_algorithms.BFS#mazeSolver(Comparable[][], Comparable, Comparable, Validators)}.
+ * but can be expanded to have move memory like
+ * {@link com.pedrofonseca.dsalgo.search_algorithms.BFS#mazeSolver(Comparable[][], Comparable, Comparable, Validators)}.
  */
 public class BFSMaze {
 

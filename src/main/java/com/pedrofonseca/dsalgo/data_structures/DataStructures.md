@@ -1,6 +1,3 @@
-Here is a list of common data structure implementations, along 
-with my notes on them.
-
 # Table of Contents:
 - [Array](#array)
 - [Vector](#vector)
@@ -10,7 +7,7 @@ with my notes on them.
 - [Heap](#heap)
 - [Priority Queue](#priority-queue)
 - [LinkedList](#linked-list)
-- [Skip List]() - ToDo (document. implement?)
+- [Skip List](#skip-list) (not yet implemented)
 - [HashMap]() - ToDo (document. implement?)
 - [Trees](#trees)
 - [Binary Search Tree](#binary-search-tree)
@@ -369,6 +366,72 @@ also implement LinkedList (as well as
 [HashSet](https://docs.oracle.com/javase/7/docs/api/java/util/HashSet.html),
 respectively). However, consider the different complexities and
 behaviours of hash maps and hash sets.
+
+
+
+## Skip List
+#### What is it?
+Skip lists are similar to linked lists, with the difference that nodes
+can have several next references instead of just one, each in a
+different "level".   
+On regular linked lists, access is O(n) since the list is traversed
+sequentially. This impacts insertion and deletion, which, while
+modularly O(1), depend on access complexity to determine where to
+insert/delete nodes. Skips lists skirt around the inherent sequentiality
+of a linked list by "skipping" chunks of the list, traversing it in
+"higher levels". In the example below, the path to node 8 would be
+{1,5,7,8} instead of {1,2,3,4,5,6,7,8}:  
+```
+    Level 2 :   1───────────5
+    Level 1 :   1     3     5─────7        10
+    Level 0 :   1  2  3  4  5  6  7──8  9  10
+```
+A simple representation of a skip list node can be seen as a node with 4
+pointers: next, previous, up, down. Next and previous function like they
+would in a linked list node. Down would always point to a node with the
+same value a level lower (except at level 0, where no down nodes exist);
+Up, if it exists, points to a node with the same value a level above.
+This means many level 0 nodes can have duplicates on higher levels,
+which makes a skip list's space complexity significantly higher that a
+comparable linked list (O(n*log(n)) instead of O(n)). [Alternate
+implementations exist](https://15721.courses.cs.cmu.edu/spring2018/papers/08-oltpindexes1/skiplists-done-right2016.pdf).  
+When inserting a new node, the decision to propagate to a higher level
+is random (traditionally 50%), in an attempt to evenly distribute "skip
+points" (since a structure cannot predict what data will be inserted).
+If the node is propagated to a higher level, repeat the decision for the
+level above - if no higher level exists, create one (this means this
+process is potentially infinite, however unlikely). As such, skip lists
+are randomized data structures.   
+It's worth noting that skips lists have time complexity comparable to
+balanced trees. The advantage of skips lists is concurrent use: locking
+a skip list (via mutex, usually) on insert/delete means locking only the
+new node and those linked to it (which is O(1), since the maximum number
+of linked nodes is limited). Locking trees usually means locking entire
+subtrees for a rebalance (which is O(log n)).  
+
+#### Average Complexities
+| Access   | Search   | Insert   | Delete   |
+|----------|----------|----------|----------|
+| O(log n) | O(log n) | O(1)     | O(1)     |
+
+**Notes on Complexity**
+- On access and search, the probability of a new level being created in
+  a higher level is 50%, so approximately half of inserted nodes will
+  propagate to higher levels, and half of those to higher levels, and so
+  forth. As such, approximately half of all elements are skipped by
+  level, much like a BST.
+- Much like a linked list, the actual insertion/deletion is O(1) (only a
+  constant number os nodes must be updated). While modular complexity is
+  constant, considering the search step brings it up to O(log n). 
+
+#### Java Implementation
+[ConcurrentSkipListMap](https://docs.oracle.com/javase/6/docs/api/java/util/concurrent/ConcurrentSkipListMap.html)
+implements a lock free skip list that guarantess average O(log n)
+performance. Implements
+[Map](https://docs.oracle.com/javase/6/docs/api/java/util/Map.html) and
+should be used over other implementations when traversal performance is
+more important than insertion performance.
+
 
 
 

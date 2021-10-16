@@ -1,5 +1,7 @@
 package com.pedrofonseca.dsalgo.data_structures.interfaces;
 
+import com.pedrofonseca.dsalgo.data_structures.AdjacencyList;
+
 import java.util.List;
 
 public interface IGraph<T extends Comparable<? super T>> {
@@ -90,4 +92,34 @@ public interface IGraph<T extends Comparable<? super T>> {
      * @return Weight os edge between from and to.
      */
     Integer getWeight(T from, T to);
+
+    /**
+     * Returns list of all currently existing edges in the graph.
+     * @return Edge list.
+     */
+    List<Edge> getEdgeList();
+
+    class Edge<J> {
+        private J from;
+        private J to;
+        private Integer cost;
+
+        public Edge(J pFrom, J pTo, Integer pCost) {
+            from = pFrom;
+            to = pTo;
+            cost = pCost;
+        }
+
+        public J getFrom() {
+            return from;
+        }
+
+        public J getTo() {
+            return to;
+        }
+
+        public Integer getCost() {
+            return cost;
+        }
+    }
 }

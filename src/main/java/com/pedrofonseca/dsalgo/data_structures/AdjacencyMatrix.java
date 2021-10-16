@@ -205,6 +205,24 @@ public class AdjacencyMatrix<T extends Comparable<? super T>> implements IGraph<
         return null;
     }
 
+    @Override
+    public List<Edge> getEdgeList() {
+        List<Edge> edgeList = new ArrayList<>();
+
+        for(int from = 0; from < numOfVertices; from++) {
+            for(int to = 0; to < numOfVertices; to++) {
+                if(adjMatrix[from][to] != null) {
+                    edgeList.add( new Edge<>(indexLookupVertices.get(from).getVertex(),
+                            indexLookupVertices.get(to).getVertex(),
+                            adjMatrix[from][to]));
+                }
+            }
+        }
+
+        // ToDo
+        return edgeList;
+    }
+
     private static class VertexRef<J extends Comparable<? super J>> {
         private J vertex;
         private int index;

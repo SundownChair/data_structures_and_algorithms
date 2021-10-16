@@ -1,6 +1,9 @@
 package com.pedrofonseca.dsalgo.data_structures;
 
+import com.pedrofonseca.dsalgo.data_structures.interfaces.IGraph;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertNull;
@@ -215,5 +218,24 @@ public class AdjacencyMatrixTest {
         mTestedClass.addEdge(STORMWIND, DARNASSUS, 30);
         assertEquals(mTestedClass.getWeight(STORMWIND, DARNASSUS), Integer.valueOf(30));
         assertNull(mTestedClass.getWeight(IRONFORGE, DARNASSUS));
+    }
+
+    @Test
+    public void testGetEdgeList() {
+        mTestedClass = new AdjacencyMatrix<>(true);
+
+        List<IGraph.Edge> edgeList = mTestedClass.getEdgeList();
+        assertEquals(0, edgeList.size());
+
+        mTestedClass.addVertex(STORMWIND);
+        mTestedClass.addVertex(IRONFORGE);
+        mTestedClass.addVertex(ORGRIMMAR);
+        mTestedClass.addEdge(STORMWIND, IRONFORGE, 1);
+        mTestedClass.addEdge(IRONFORGE, ORGRIMMAR, 1);
+        mTestedClass.addEdge(ORGRIMMAR, STORMWIND, 1);
+        mTestedClass.addEdge(STORMWIND, ORGRIMMAR, 1);
+
+        edgeList = mTestedClass.getEdgeList();
+        assertEquals(4, edgeList.size());
     }
 }

@@ -1,10 +1,9 @@
-ToDo: Watch the 6 hour video. BFS, DFS, Djiktra's, A*, etc etc
-
 # Table of Contents:
 - [Depth First Search](#depth-first-search)
 - [Breadth First Search](#breadth-first-search)
 - [Single Source Shortest/Longest Path on DAG](#sssp)
-
+- [Dijkstra's Shortest Path Algorithm](#dijkstra)
+- [Bellman-Ford Shortest Path Algorithm](#bellman-ford)
 
 
 ## Depth First Search
@@ -96,7 +95,7 @@ return dist
 
 
 
-## <a name='sssp'/>Dijkstra's Shortest Path Algorithm
+## <a name='dijkstra'/>Dijkstra's Shortest Path Algorithm
 #### Algorithm
 Dijkstra's algorithm is a Single Source Shortest Path algorithm for
 graphs with non-negative edge weights. A start node must be specified,
@@ -160,25 +159,40 @@ impractical for smaller graphs.
 
 
 
-
-Delete below this point-------------------------------------------------
-## Select Sort
+## <a name='bellman-ford'/>Bellman-Ford Shortest Path Algorithm
 #### Algorithm
-Given an unordered array a, and i is the current index, iterate for all
-elements (last element may be omitted):
-- Find the most extreme value (max/min) in subarray of a starting from i
-- Swap most extreme value and element at i
+The Bellman-Ford algorithm is a Single Source Shortest Path algorithm. 
+Time complexity is worse Dijkstra's (especially if using implementations
+such as indexed priority queues or Fibonacci heaps), but Bellman-Ford 
+can handle negative edge weights (which cause Dijkstra's to fail in an
+infinite loop). Negative edges can create infinite cycles or affect
+other nodes, placing them in a negative cycle as well.
+
+
+Given a graph 'g' with n elements, and starting node 's', call:
 ```
- 10 3 9 6 1   ->   1 3 9 6 10   ->   1 3 6 9 10
- swap(10,1)        swap(9,6)
+// account for possible overflows in all sums with +∞/-∞ 
+numVertices = g.numOfVertices()
+dist = [+∞, ..., +∞] // n length
+dist[s] = 0
+	
+// First cycle relaxes edges to the shortest path possible
+for(i = 0; i < numVertices-1; i++)
+  for edge in graph.getEdges()
+    if(dist[edge.from] + edge.cost < dist[edge.to])
+      dist[edge.to] = dist[edge.from] + edge.cost
+	
+// Second cycle find nodes in a negative cycle 
+// Any update performed on the optimal path marks a negative cycle
+for(i = 0; i < numVertices-1; i++)
+  for edge in graph.getEdges()
+    if(dist[edge.from] + edge.cost < dist[edge.to])
+      dist[edge.to] = -∞ // node is "unreachable"
+	
+return dist
 ```
 
 #### Average Complexity
-| Average | Worst   | Best    | Space Complexity     |
-|---------|---------|---------|----------------------|
-| O(n²)   | O(n²)   | O(n²)   | O(1)                 |
-
-**Notes on Complexity**
-- In Place sort
-- Outperforms bubble sort, and usually underperforms insert sort (always
-  O(n²) performance)
+| Average               |
+|-----------------------|
+| O(edges * vertices)   |

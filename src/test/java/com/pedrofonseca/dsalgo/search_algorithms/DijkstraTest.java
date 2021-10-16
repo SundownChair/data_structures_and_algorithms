@@ -74,4 +74,19 @@ public class DijkstraTest {
         assertEquals(Arrays.asList(STORMWIND, ORGRIMMAR, IRONFORGE, DARNASSUS, UNDERCITY, DALARAN),
                 shortestPathToDalaran);
     }
+
+    @Test
+    public void testNegativeEdgeDijkstra() {
+        mGraph = new AdjacencyList<>(true);
+        mGraph.addVertex(STORMWIND);
+        mGraph.addVertex(IRONFORGE);
+        mGraph.addEdge(STORMWIND, IRONFORGE, -1);
+
+        try {
+            Dijkstra.run(mGraph, STORMWIND);
+            fail();
+        } catch (IllegalArgumentException e) {
+            // all good
+        }
+    }
 }

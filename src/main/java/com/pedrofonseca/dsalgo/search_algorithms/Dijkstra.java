@@ -5,8 +5,22 @@ import com.pedrofonseca.dsalgo.data_structures.interfaces.IGraph;
 
 import java.util.*;
 
+/**
+ * <p>Implements Dijkstra's Algorithm to find single source shortest paths in the graph relative to a given start node.
+ * Implemented via Index Priority Queue.</p>
+ * <p></p>
+ * <p>Average Time Complexity: O(num of edges * log(num of vertices))</p>
+ */
 public class Dijkstra {
 
+    /**
+     * Traverses graph for the optimal path between given start node and all other connected nodes.
+     * Negative edge weights unsupported due to possible infinite negative cycles.
+     * @param pGraph Graph to traverse.
+     * @param pStart Start node.
+     * @param <T> Map of connected vertices with total cost from start and immediate previous node.
+     * @return
+     */
     public static<T extends Comparable<? super T>> Map<T, DOutput> run(IGraph<T> pGraph, T pStart) {
         if(pGraph == null || pStart == null) {
             throw new NullPointerException();
@@ -25,6 +39,9 @@ public class Dijkstra {
 
         while(!queue.isEmpty()) {
             Integer currentDistance = queue.peekValue();
+            if(currentDistance < 0) {
+                throw new IllegalArgumentException("Traversal does not support negative edge weights.");
+            }
             T currentNode = queue.poll();
             visited.add(currentNode);
 
@@ -81,31 +98,4 @@ public class Dijkstra {
             distanceFromStart = pDistanceFromStart;
         }
     }
-
-    /*
-    given graph 'g' with n elements, and starting node 's':
-	visited = [false, ..., false] // n length
-	previous = [null, ..., null] // n length, used to rebuild best path to given node
-	distance = [null, ..., null] // n length
-	distance[s] = 0
-	queue = empty indexed priority queue
-	queue.add(s, 0)
-	while(!queue.isEmpty())
-		node, bestDistance = queue.poll()
-		visited[node] = true
-		if distance[node] < bestDistance
-			continue
-		for(childNode : g.getLinkedNodes(node))
-			if visited[childNode]
-				continue
-			newDistance = distance[node] + g.getDistance(node, childNode)
-			if distance[childNode] == null || newDistance < distance[childNode]
-				distance[childNode] = newDistance
-				previous[childNode] = node
-				if !queue.contains(childNode)
-					queue.add(childNode, newDistance)
-				else
-					queue.updateKey(childNode, newDistance) // updates value if better than existing
-	return distance
-     */
 }

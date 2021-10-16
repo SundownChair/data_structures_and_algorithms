@@ -2,10 +2,7 @@ package com.pedrofonseca.dsalgo.data_structures;
 
 import com.pedrofonseca.dsalgo.data_structures.interfaces.IGraph;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>Graph represented as a map of nodes that list all edges of itself. Each node tracks all its outgoing edges (weight
@@ -136,5 +133,33 @@ public class AdjacencyList<T extends Comparable<? super T>> implements IGraph<T>
             return adjList.get(from).get(to);
         }
         return null;
+    }
+
+    public List<Edge> getEdgeList() {
+        List<Edge> edgeList = new ArrayList<>();
+        if(countEdge() == 0) {
+            return edgeList;
+        }
+
+        Set<T> visited = new HashSet<>();
+        for(T vector : adjList.keySet()) {
+            // Iterate to account for graphs not fully linked
+            if(!visited.contains(vector)) {
+                dfsFillEdgeList(vector, edgeList, visited);
+            }
+        }
+        return edgeList;
+    }
+
+    private void dfsFillEdgeList(T pCurrentVector, List<Edge> pEdgeList, Set<T> pVisited) {
+        if(pVisited.contains(pCurrentVector)) {
+            return;
+        }
+        pVisited.add(pCurrentVector);
+
+        for(T node : getLinkedVertices(pCurrentVector)) {
+            pEdgeList.add(new Edge<T>(pCurrentVector, node, adjList.get(pCurrentVector).get(node)));
+            dfsFillEdgeList(node, pEdgeList, pVisited);
+        }
     }
 }
